@@ -1,0 +1,20 @@
+.myNav {
+    background-color: black !important;
+ 
+}
+
+.myNav .navbar-nav .nav-link {
+    color: white !important;
+}
+
+.myNav .navbar-nav .nav-link:hover {
+    color: gray !important;
+}
+.myNav .navbar-brand {
+    padding-left: 10px;
+    color: white !important;
+}
+
+.myNav .navbar-brand:hover {
+    color: gray !important;
+}

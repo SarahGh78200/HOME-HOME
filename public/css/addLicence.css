@@ -1,0 +1,35 @@
+.form1 {
+    max-width: 400px; /* Largeur fixe plus adaptée */
+    margin: 0 auto; /* Centrage horizontal */
+    background: rgba(229, 222, 222, 0.85);
+    padding: 20px;
+    border-radius: 10px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* Ajout d'une légère ombre */
+}
+h1 {
+    padding-top: 20px;
+    text-align: center;
+    margin-bottom: 20px; /* Espacement entre le titre et le formulaire */
+}
+input, select, textarea {
+    width: 100%; /* Pour s’adapter à la largeur du formulaire */
+    padding: 10px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    font-size: 16px;
+}
+button {
+    width: 100%;
+    background-color: #007bff;
+    color: white;
+    border: none;
+    padding: 10px;
+    border-radius: 5px;
+    font-size: 16px;
+    cursor: pointer;
+    transition: background-color 0.3s ease-in-out;
+}
+
+button:hover {
+    background-color: #0056b3;
+}

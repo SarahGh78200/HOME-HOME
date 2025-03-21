@@ -1,0 +1,51 @@
+/* Applique un style général */
+.bodyController {
+    font-family: Arial, sans-serif;
+    text-align: center;
+    background-color: #f8f9fa;
+    position: relative;
+    overflow: hidden;
+}
+
+/* Vidéo en arrière-plan */
+.video-background {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    z-index: -1;
+}
+
+/* Contenu principal */
+.content {
+    position: relative;
+    z-index: 1;
+    background: rgba(0, 0, 0, 0.6); /* Fond semi-transparent noir */
+    color: white;
+    padding: 30px;
+    border-radius: 15px;
+    max-width: 80%;
+    margin: 50px auto;
+    box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.3);
+}
+
+/* Style du texte */
+h1 span {
+    color: #007BFF;
+}
+
+img {
+    max-width: 100%;
+    height: auto;
+    margin-bottom: 30px;
+}
+
+.small-img {
+    max-width: 50%;
+}
+
+h1 {
+    padding-top: 20px;
+}
