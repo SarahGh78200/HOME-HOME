@@ -21,17 +21,16 @@ require_once(__DIR__ . '/../partials/head.php');
         <p><strong>Email :</strong> <?= htmlspecialchars($user->getEmail()) ?></p>
         <p><strong>Date de naissance :</strong> <?= htmlspecialchars($user->getBirthDate()) ?></p>
         <div class="buttonEditProfile">
-    <a href="/editProfilUser">Modifier mon profil</a>
-</div>
+            <a href="/editProfilUser">Modifier mon profil</a>
+        </div>
 
     </div>
 
     <div class="buttonMyLicence">
-      <a href="/licenceUser"> Mes Licences</a>
+        <a href="/licenceUser"> Mes Licences</a>
     </div>
 
-
-
 </body>
-
 </html>
+
+<?php require_once(__DIR__ . '/../partials/footer.php'); ?>

@@ -111,7 +111,8 @@ public static function getClients(): array
         return null;
         
     }
-    
+ 
+ 
 
     public function getLicences(): array
     {
@@ -166,6 +167,7 @@ public function licenceClient()
     }
     return null;
 }
+
 public static function getLicencesByUserId(int $userId): array
 {
     $pdo = DataBase::getConnection();
@@ -190,7 +192,14 @@ public static function getLicencesByUserId(int $userId): array
     
 }
 
-
+public function getUserById($id)
+{
+    $pdo = DataBase::getConnection();
+    $sql = "SELECT `name`, `email` FROM `user` WHERE `id` = ?"; // Correction ici
+    $statement = $pdo->prepare($sql);
+    $statement->execute([$id]);
+    return $statement->fetch(PDO::FETCH_ASSOC);
+}
 public function updateUser($id, $surname, $name, $birthDate, $email, $password, $idRole): bool {
     $db = DataBase::getConnection();
     $sql = "UPDATE user SET surname = ?, name = ?, birth_date = ?, email = ?, password = ?, id_role = ? WHERE id = ?";

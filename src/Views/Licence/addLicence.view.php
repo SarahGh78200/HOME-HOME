@@ -39,17 +39,8 @@ require_once(__DIR__ . '/../partials/head.php');
             <?php } ?>
         </div>
 
-        <!-- Champ Disponibilité -->
-        <div class="mb-3">
-            <label for="availability" class="form-label">Disponibilité</label>
-            <select class="form-select" id="availability" name="availability" required>
-                <option value="disponible" <?= $availability === 1 ? 'selected' : '' ?>>Disponible</option>
-                <option value="indisponible" <?= $availability === 0 ? 'selected' : '' ?>>Indisponible</option>
-            </select>
-            <?php if (isset($errors['availability'])) { ?>
-                <p class="text-danger"><?= htmlspecialchars($errors['availability']) ?></p>
-            <?php } ?>
-        </div>
+
+
 
         <!-- Champ Description -->
         <div class="mb-3">

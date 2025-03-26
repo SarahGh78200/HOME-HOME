@@ -5,47 +5,63 @@ require_once(__DIR__ . '/../partials/head.php');
 
 <!DOCTYPE html>
 <html lang="fr">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Mes Licences</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
 </head>
-<body>
-    <div class="container">
-        <h1>Mes Licences</h1>
+
+<body class="bg-light">
+    <div class="container mt-5">
+        <h1 class="text-center mb-4">Mes Licences</h1>
 
         <?php if (empty($licences)) : ?>
-            <p>Aucune licence ajoutée.</p>
+            <div class="alert alert-warning text-center">Aucune licence ajoutée.</div>
         <?php else : ?>
-            <table border="1" cellpadding="10" cellspacing="0" style="width: 100%; border-collapse: collapse;">
-                <thead>
-                    <tr>
-                        <th>Titre</th>
-                        <th>Description</th>
-                        <th>Prix</th>
-                        <th>Disponibilité</th>
-                        <th>Action</th> <!-- Ajout de la colonne action -->
-                    </tr>
-                </thead>
-                <tbody>
-                    <?php foreach ($licences as $licence) : ?>
+            <div class="table-responsive">
+                <table class="table table-striped table-bordered">
+                    <thead class="table-dark">
                         <tr>
-                            <td><?= htmlspecialchars($licence->getTitle()) ?></td>
-                            <td><?= htmlspecialchars($licence->getDescription()) ?></td>
-                            <td><?= htmlspecialchars($licence->getPrice()) ?> €</td>
-                            <td><?= $licence->getAvailability() ? 'Disponible' : 'Indisponible' ?></td>
-                            <td>
-                                <!-- Formulaire de suppression -->
-                                <form action="/deleteLicence" method="POST" onsubmit="return confirm('Voulez-vous vraiment supprimer cette licence ?');">
-                                    <input type="hidden" name="id" value="<?= $licence->getId() ?>">
-                                    <button type="submit">Supprimer</button>
-                                </form>
-                            </td>
+                            <th>Titre</th>
+                            <th>Description</th>
+                            <th>Prix (€)</th>
+                            <th>Disponibilité</th>
+                            <th>Action</th>
                         </tr>
-                    <?php endforeach; ?>
-                </tbody>
-            </table>
+                    </thead>
+                    <tbody>
+                        <?php foreach ($licences as $licence) : ?>
+                            <tr>
+                                <td><?= htmlspecialchars($licence->getTitle()) ?></td>
+                                <td><?= htmlspecialchars($licence->getDescription()) ?></td>
+                                <td><?= htmlspecialchars($licence->getPrice()) ?> €</td>
+                                <td>
+                                    <span class="badge <?= $licence->getAvailability() ? 'bg-success' : 'bg-danger' ?>">
+                                        <?= $licence->getAvailability() ? 'Disponible' : 'Indisponible' ?>
+                                    </span>
+                                </td>
+                                <td>
+                                    <a href="/editLicence?id=<?= $licence->getId() ?>" class="btn btn-warning btn-sm">
+                                        ✏️ Modifier
+                                    </a>
+                                    <form action="/deleteLicence" method="POST" onsubmit="return confirm('Voulez-vous vraiment supprimer cette licence ?');" style="display:inline;">
+                                        <input type="hidden" name="id" value="<?= $licence->getId() ?>">
+                                        <button type="submit" class="btn btn-danger btn-sm">🗑️ Supprimer</button>
+                                    </form>
+                                </td>
+
+                            </tr>
+                        <?php endforeach; ?>
+                    </tbody>
+                </table>
+            </div>
         <?php endif; ?>
     </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
 </body>
+
 </html>
+<?php require_once(__DIR__ . '/../partials/footer.php'); ?>

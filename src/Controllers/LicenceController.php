@@ -28,21 +28,19 @@ class LicenceController extends AbstractController
         }
     }
 
-    public function addLicence()
+    public function addLicence() 
     {
-        if (!isset($_SESSION['user']) || !$_SESSION['user']['idRole']) {
+        if (!isset($_SESSION['user']) || empty($_SESSION['user']['idRole'])) {
             $this->redirectToRoute('/');
         }
     
         $errors = [];
         $title = '';
-        $availability = '';
         $description = '';
         $price = '';
     
         if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             $title = htmlspecialchars(trim($_POST['title'] ?? ''));
-            $availability = isset($_POST['availability']) && $_POST['availability'] === 'disponible' ? 1 : 0;
             $description = htmlspecialchars(trim($_POST['description'] ?? ''));
             $price = htmlspecialchars(trim($_POST['price'] ?? ''));
             $picture = $_FILES['picture'] ?? null;
@@ -51,9 +49,6 @@ class LicenceController extends AbstractController
             // Validation des champs
             if (empty($title) || strlen($title) < 4 || strlen($title) > 100) {
                 $errors['title'] = "Le titre doit avoir entre 4 et 100 caractères.";
-            }
-            if (!in_array($availability, [0, 1], true)) {
-                $errors['availability'] = "Disponibilité invalide.";
             }
             if (empty($description) || strlen($description) < 4 || strlen($description) > 500) {
                 $errors['description'] = "La description doit avoir entre 4 et 500 caractères.";
@@ -94,7 +89,7 @@ class LicenceController extends AbstractController
     
             // Si aucune erreur, ajouter la licence
             if (empty($errors)) {
-                $licence = new Licence(null, $title, $description, $availability, $picture, $price, $id_user);
+                $licence = new Licence(null, $title, $description, 1, $picture, $price, $id_user); // `availability` fixé à 1
                 if ($licence->addLicence()) {
                     $_SESSION['successMessage'] = "Licence ajoutée avec succès !";
                     $this->redirectToRoute('/licence');
@@ -106,7 +101,7 @@ class LicenceController extends AbstractController
     
         require_once(__DIR__ . '/../Views/Licence/addLicence.view.php');
     }
-
+    
     public function readLicence()
     {
         $licences = Licence::readLicence();
@@ -127,7 +122,7 @@ class LicenceController extends AbstractController
             $licence = new Licence($idLicence, null, null, null, null, null, null);
             $licence->deleteLicence();
             $_SESSION['successMessage'] = "Licence supprimée avec succès.";
-            $this->redirectToRoute('/licence');
+            $this->redirectToRoute('/licenceUser');
         }
     }
       
@@ -153,23 +148,151 @@ class LicenceController extends AbstractController
 }
 public function viewLicenceDetail()
 {
-    if (isset($_GET['id'])) {
-        $idLicence = htmlspecialchars($_GET['id']);
-        $licence = new Licence($idLicence, null, null, null, null, null, null);
-        $myLicence = $licence->getLicenceById();
+    if (!isset($_GET['id'])) {
+        $this->redirectToRoute('/404');
+    }
 
-        if (!$myLicence) {
-            $this->redirectToRoute('/404');  // Page 404 si licence non trouvée
+    $idLicence = htmlspecialchars($_GET['id']);
+    $licence = new Licence($idLicence, null, null, null, null, null, null);
+    $myLicence = $licence->getLicenceById();
+
+    if (!$myLicence) {
+        $this->redirectToRoute('/404');
+    }
+
+    // Récupérer les infos de l'utilisateur sans afficher l'ID
+    $idUser = $myLicence->getIdUser();
+    $user = new User($idUser, null, null, null, null, null, null);
+    $userInfo = $user->getUserById($idUser); // Récupère nom et email sans afficher l'ID
+
+    require_once(__DIR__ . "/../Views/licence/licenceDetail.view.php");
+}
+
+  
+public function updateLicence()
+{
+    if (!isset($_SESSION['user_id'])) {
+        header("Location: /login");
+        exit();
+    }
+
+    if ($_SERVER['REQUEST_METHOD'] === 'POST') {
+        $id = filter_input(INPUT_POST, 'id', FILTER_SANITIZE_NUMBER_INT);
+        $title = filter_input(INPUT_POST, 'title', FILTER_SANITIZE_STRING);
+        $description = filter_input(INPUT_POST, 'description', FILTER_SANITIZE_STRING);
+        $price = filter_input(INPUT_POST, 'price', FILTER_VALIDATE_FLOAT);
+        $availability = filter_input(INPUT_POST, 'availability', FILTER_SANITIZE_NUMBER_INT);
+
+        $licence = (new Licence($id, '', '', 0, '', 0, 0))->getLicenceById();
+        $picture = $licence ? $licence->getPicture() : 'default.jpg';
+
+        if (isset($_FILES['picture']) && $_FILES['picture']['error'] === 0) {
+            $targetDirectory = $_SERVER['DOCUMENT_ROOT'] . '/public/imgUpload/';
+            if (!is_dir($targetDirectory)) {
+                mkdir($targetDirectory, 0755, true);
+            }
+
+            $extension = pathinfo($_FILES['picture']['name'], PATHINFO_EXTENSION);
+            $pictureName = uniqid() . '.' . $extension;
+            $targetFile = $targetDirectory . $pictureName;
+
+            if (move_uploaded_file($_FILES['picture']['tmp_name'], $targetFile)) {
+                $picture = $pictureName;
+            }
         }
 
-        // Récupérer l'utilisateur associé à la licence
-        $idUser = $myLicence->getIdUser();
-        $user = new User($idUser, null, null, null, null, null, null);
-
-        require_once(__DIR__ . "/../Views/licence/licenceDetail.view.php");
-    } else {
-        $this->redirectToRoute('/404');  // Si l'ID n'est pas présent, redirection vers 404
+        $licence = new Licence($id, $title, $description, $availability, $picture, $price, $_SESSION['user_id']);
+        if ($licence->updateLicence()) {
+            header('Location: /licence');
+            exit();
+        }
     }
+
+    require_once(__DIR__ . '/../Views/Licence/editLicence.view.php');
 }
 
+public function editLicence()
+{
+    // Vérification de l'authentification
+    if (!isset($_SESSION['user'])) {
+        $this->redirectToRoute('/login');
+        return;
+    }
+
+    $idLicence = (int)($_GET['id'] ?? $_POST['id'] ?? 0);
+    $licence = ($idLicence) ? (new Licence($idLicence, null, null, null, null, null, null))->getLicenceById() : null;
+
+    if ($_SERVER['REQUEST_METHOD'] === 'POST') {
+        // Récupérer les données du formulaire
+        $title = trim($_POST['title'] ?? '');
+        $description = trim($_POST['description'] ?? '');
+        $price = (float)($_POST['price'] ?? 0);
+
+        // Vérification et modification de la disponibilité
+        $availability = isset($_POST['availability']) ? 1 : 0; // Si la case est cochée, disponibilité à 1 sinon 0
+
+        // Gestion de l'image téléversée
+        $uploadedPicture = $this->uploadPicture();
+        $picture = $uploadedPicture ? $uploadedPicture : $licence->getPicture();
+
+        if ($title && $description && $price > 0) {
+            // Mise à jour de la licence avec la nouvelle disponibilité
+            $licence = new Licence($idLicence, $title, $description, $availability, $picture, $price, $_SESSION['user']['idUser']);
+            $licence->updateLicence();
+            $_SESSION['successMessage'] = "Licence mise à jour avec succès !";
+            $this->redirectToRoute('/licenceUser');
+            return;
+        } else {
+            $_SESSION['formErrors'] = ["Tous les champs sont obligatoires et le prix doit être supérieur à 0."];
+        }
+    }
+
+    require_once(__DIR__ . '/../Views/Licence/editLicence.view.php');
 }
+
+private function uploadPicture(): ?string
+{
+    $picture = $_FILES['picture'] ?? null;
+
+    if ($picture && $picture['error'] === 0) {
+        $allowedTypes = ['image/jpeg', 'image/png', 'image/gif'];
+        $maxFileSize = 2 * 1024 * 1024; // 2 Mo
+        $uploadDir = $_SERVER['DOCUMENT_ROOT'] . '/public/imgUpload/'; // Chemin du dossier
+
+        // Vérifier le type MIME
+        if (!in_array($picture['type'], $allowedTypes)) {
+            $_SESSION['formErrors'][] = "Le fichier doit être une image de type JPEG, PNG ou GIF.";
+            return null;
+        }
+
+        // Vérifier la taille du fichier
+        if ($picture['size'] > $maxFileSize) {
+            $_SESSION['formErrors'][] = "La taille de l'image ne doit pas dépasser 2 Mo.";
+            return null;
+        }
+
+        // Créer le dossier s'il n'existe pas
+        if (!is_dir($uploadDir)) {
+            mkdir($uploadDir, 0755, true);
+        }
+
+        // Générer un nom unique pour l'image
+        $extension = pathinfo($picture['name'], PATHINFO_EXTENSION);
+        $pictureName = uniqid() . '.' . $extension;
+        $uploadFile = $uploadDir . $pictureName;
+
+        // Déplacer l'image téléversée dans le dossier
+        if (move_uploaded_file($picture['tmp_name'], $uploadFile)) {
+            return $pictureName; // Retourner le nom de l'image en cas de succès
+        } else {
+            $_SESSION['formErrors'][] = "Erreur lors du téléversement de l'image.";
+        }
+    }
+
+    return null; // Retourner null en cas d'échec
+}
+
+
+
+}
+

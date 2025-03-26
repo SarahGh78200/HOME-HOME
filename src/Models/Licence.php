@@ -26,46 +26,44 @@ class Licence
         $this->id_user = $id_user;
     }
 
-    public function addLicence(): bool
+    public function addLicence(): bool 
     {
         $pdo = DataBase::getConnection();
-        $sql = "INSERT INTO `licence` (`title`, `description`, `availability`, `picture`, `price`, `id_user`) VALUES (?,?,?,?,?,?)";
-        $statement = $pdo->prepare($sql);
-        return $statement->execute([$this->title, $this->description, $this->availability, $this->picture, $this->price, $this->id_user]);
-    }
-    public function getLicenceById()
-    {
-        $pdo = DataBase::getConnection();
-        $pdo->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
+        $sql = "INSERT INTO `licence` (`title`, `description`, `availability`, `picture`, `price`, `id_user`) 
+                VALUES (?, ?, 1, ?, ?, ?)"; // `availability` est toujours 1
     
-        $sql = "SELECT `id`, `title`, `description`, `availability`, `picture`, `price`, `id_user` FROM `licence` WHERE `id` = ?";
         $statement = $pdo->prepare($sql);
-        $statement->execute([$this->id]);
-        $row = $statement->fetch(PDO::FETCH_ASSOC);
-    
-        if ($row) {
-            return new Licence(
-                $row['id'],
-                $row['title'],
-                $row['description'],
-                (int) $row['availability'], // Convertir en entier
-                $row['picture'],
-                $row['price'],
-                $row['id_user']
-            );
-        }
-        return null;
+        return $statement->execute([
+            $this->title, 
+            $this->description, 
+            $this->picture, 
+            $this->price, 
+            $this->id_user
+        ]);
     }
-  
-
-    public function updateLicence(): bool
+    
+    public function getLicenceById(): ?Licence
     {
         $pdo = DataBase::getConnection();
-        $sql = "UPDATE `licence` SET `title` = ?, `description` = ?, `availability` = ?, `picture` = ?, `price` = ? WHERE `id` = ?";
-        $statement = $pdo->prepare($sql);
-        return $statement->execute([$this->title, $this->description, $this->availability, $this->picture, $this->price, $this->id]);
+        $sql = "SELECT * FROM `licence` WHERE `id` = ?";
+        $stmt = $pdo->prepare($sql);
+        $stmt->execute([$this->id]);
+        $data = $stmt->fetch(PDO::FETCH_ASSOC);
+        
+        return $data ? new Licence(
+            $data['id'], $data['title'], $data['description'], 
+            $data['availability'], $data['picture'], $data['price'], $data['id_user']
+        ) : null;
     }
 
+    public function updateLicence()
+    {
+        $db = Database::getConnection();
+        // Requête SQL pour mettre à jour la licence avec la disponibilité
+        $query = $db->prepare("UPDATE licence SET title = ?, description = ?, availability = ?, picture = ?, price = ? WHERE id = ?");
+        return $query->execute([$this->title, $this->description, $this->availability, $this->picture, $this->price, $this->id]);
+    }
+    
     public function deleteLicence(): bool
     {
         $pdo = DataBase::getConnection();
@@ -105,6 +103,8 @@ class Licence
         }
         return '/public/imgUpload/default.jpg'; // Image par défaut si le fichier n'existe pas
     }
+
+    
     // Getters et Setters
     public function getId(): ?int
     {

@@ -83,8 +83,6 @@ h1 {
     text-align: center;
 }
 
-
-
 /* Button d'ajout de licence */
 .button-add {
     display: inline-block;
@@ -100,6 +98,29 @@ h1 {
 
 .button-add:hover {
     background-color: #2ecc71;
+}
+
+/* Bouton Acheter */
+.buy-button {
+    background-color: #2980b9; /* Couleur bleue */
+    color: white;
+    padding: 10px 20px;
+    border-radius: 5px;
+    border: none;
+    font-size: 1em;
+    cursor: pointer;
+    transition: background-color 0.3s ease, transform 0.3s ease;
+    width: 100%;
+    margin-top: 15px;
+}
+
+.buy-button:hover {
+    background-color: #3498db; /* Couleur bleue plus claire au survol */
+    transform: translateY(-2px); /* Effet de déplacement léger */
+}
+
+.buy-button:focus {
+    outline: none; /* Retirer la bordure de focus */
 }
 
 /* Adaptations pour les petits écrans */

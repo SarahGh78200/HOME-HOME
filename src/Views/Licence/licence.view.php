@@ -21,7 +21,12 @@ require_once(__DIR__ . '/../partials/head.php');
                         <h2><?= htmlspecialchars($licence->getTitle()) ?></h2>
                         <p><?= htmlspecialchars($licence->getDescription()) ?></p>
                         <p class="price">Prix: <?= htmlspecialchars($licence->getPrice()) ?> €</p>
-                        <p>Disponible</p>  
+                        
+                        <!-- Bouton Acheter -->
+                        <form action="/acheterLicence" method="post">
+                            <input type="hidden" name="licence_id" value="<?= $licence->getId(); ?>">
+                            <button type="submit" class="buy-button">Réservé</button>
+                        </form>
                     </a>
                 <?php endif; ?>
             <?php endforeach; ?>
@@ -32,3 +37,4 @@ require_once(__DIR__ . '/../partials/head.php');
 
 </body>
 </html>
+<?php require_once(__DIR__ . '/../partials/footer.php'); ?>

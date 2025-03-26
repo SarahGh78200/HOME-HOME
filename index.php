@@ -7,35 +7,28 @@ use Config\Router;
 
 $router = new Router();
 
-/** j'utilise la méthode addRoute de mon controller pour ajouter des routes au controller
- *  cette méthode prend trois arguments : la route, le controller et la méthode exécutée
- */
-// la page d'accueil
+// Page d'accueil
 $router->addRoute('/', 'HomeController', 'index');
-// La connexion/déconnexion et inscription:
+
+// Connexion/Déconnexion & Inscription
 $router->addRoute('/register', 'RegisterController', 'index');
 $router->addRoute('/login', 'LoginController', 'index');
 $router->addRoute('/logout', 'LogoutController', 'logout');
-$router->addRoute('/404', 'ErrorController', 'notFound');
+
+// Profil utilisateur
 $router->addRoute('/profil', 'UserController', 'profil');
 $router->addRoute('/licenceUser', 'UserController', 'mesLicences');
 $router->addRoute('/editProfilUser', 'UserController', 'editProfilUser');
+
+// Détails des licences
 $router->addRoute('/licenceDetails', 'LicenceController', 'showLicence');
 $router->addRoute('/licenceDetail', 'LicenceController', 'viewLicenceDetail');
 
-
-
-
-
-
-// Les licences:
+// Gestion des licences
 $router->addRoute('/addLicence', 'LicenceController', 'addLicence');
 $router->addRoute('/licence', 'LicenceController', 'readLicence');
 $router->addRoute('/editLicence', 'LicenceController', 'editLicence');
+$router->addRoute('/updateLicence', 'LicenceController', 'updateLicence'); // Ajout de la route manquante
 $router->addRoute('/deleteLicence', 'LicenceController', 'deleteLicence');
-
-// $router->addRoute('/deleteLicenceAndTodo', 'LicenceController', 'deleteLicenceAndTodo');
-// $router->addRoute('/assignLicence', 'LicenceController', 'addKidLicence');
-// $router->addRoute('/updateAssignLicence', 'LicenceController', 'updateTodoLicence');
 
 $router->handleRequest();

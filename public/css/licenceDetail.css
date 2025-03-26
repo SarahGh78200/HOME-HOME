@@ -46,7 +46,7 @@ p {
 .price {
     font-size: 1.4em;
     font-weight: bold;
-    color: #d35400;
+    color: #ff0808;
     margin-top: 15px;
 }
 
@@ -93,6 +93,28 @@ p {
 .back-button:hover {
     background-color: #e65100;
     transform: scale(1.05);
+}
+/* Bouton Acheter */
+.buy-button {
+    background-color: #2980b9; /* Couleur bleue */
+    color: white;
+    padding: 10px 20px;
+    border-radius: 5px;
+    border: none;
+    font-size: 1em;
+    cursor: pointer;
+    transition: background-color 0.3s ease, transform 0.3s ease;
+    width: 100%;
+    margin-top: 15px;
+}
+
+.buy-button:hover {
+    background-color: #3498db; /* Couleur bleue plus claire au survol */
+    transform: translateY(-2px); /* Effet de déplacement léger */
+}
+
+.buy-button:focus {
+    outline: none; /* Retirer la bordure de focus */
 }
 
 /* Adaptation mobile */
