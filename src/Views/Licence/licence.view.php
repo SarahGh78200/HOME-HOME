@@ -23,10 +23,12 @@ require_once(__DIR__ . '/../partials/head.php');
                         <p class="price">Prix: <?= htmlspecialchars($licence->getPrice()) ?> €</p>
                         
                         <!-- Bouton Acheter -->
-                        <form action="/acheterLicence" method="post">
-                            <input type="hidden" name="licence_id" value="<?= $licence->getId(); ?>">
-                            <button type="submit" class="buy-button">Réservé</button>
-                        </form>
+                      <!-- Bouton Acheter -->
+<form action="/licenceDetail" method="get">
+    <input type="hidden" name="id" value="<?= $licence->getId(); ?>">
+    <button type="submit" class="buy-button">Réservé</button>
+</form>
+
                     </a>
                 <?php endif; ?>
             <?php endforeach; ?>

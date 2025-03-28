@@ -210,6 +210,19 @@ public function updateUser($id, $surname, $name, $birthDate, $email, $password, 
 
 
 
+public static function getContactDetailsByLicenceId(int $licenceId): ?array
+{
+    $pdo = DataBase::getConnection();
+    $sql = "SELECT u.surname, u.name, u.email 
+            FROM user u
+            JOIN licence l ON u.id = l.id_user
+            WHERE l.id = ?";
+    $statement = $pdo->prepare($sql);
+    $statement->execute([$licenceId]);
+    $row = $statement->fetch(PDO::FETCH_ASSOC);
+
+    return $row ?: null; // Retourne un tableau avec les infos ou null si aucun résultat
+}
 
 
 
