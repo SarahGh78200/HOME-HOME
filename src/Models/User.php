@@ -223,7 +223,28 @@ public static function getContactDetailsByLicenceId(int $licenceId): ?array
 
     return $row ?: null; // Retourne un tableau avec les infos ou null si aucun résultat
 }
+public static function findById(int $id): ?self
+{
+    $pdo = DataBase::getConnection(); // Correction: DataBase au lieu de Database
+    $stmt = $pdo->prepare("SELECT * FROM user WHERE id = :id"); // Correction: user au lieu de users
+    $stmt->execute(['id' => $id]);
+    $userData = $stmt->fetch(PDO::FETCH_ASSOC);
 
+    if (!$userData) {
+        return null;
+    }
+
+    // Correction: Création de l'objet User selon votre constructeur
+    return new User(
+        $userData['id'],
+        $userData['surname'],
+        $userData['name'],
+        $userData['birth_date'],
+        $userData['password'],
+        $userData['id_role'],
+        $userData['email']
+    );
+}
 
 
     // Getters et Setters

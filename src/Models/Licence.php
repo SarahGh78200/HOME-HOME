@@ -103,27 +103,26 @@ class Licence
         }
         return '/public/imgUpload/default.jpg'; // Image par défaut si le fichier n'existe pas
     }
-
-    public static function findById(int $id): ?Licence
+    public static function findById(int $id): ?self
     {
-        $pdo = DataBase::getConnection();
-        $sql = "SELECT * FROM licence WHERE id = ?";
-        $statement = $pdo->prepare($sql);
-        $statement->execute([$id]);
-        $row = $statement->fetch(PDO::FETCH_ASSOC);
-
-        if ($row) {
-            return new Licence(
-                $row['id'],
-                $row['title'],
-                $row['description'],
-                (int) $row['availability'],
-                $row['picture'],
-                (float) $row['price'],
-                (int) $row['id_user']
-            );
+        $pdo = DataBase::getConnection(); // Utilisez getConnection() au lieu de getPDO()
+        $stmt = $pdo->prepare("SELECT * FROM licence WHERE id = ?"); // Table "licence" au singulier
+        $stmt->execute([$id]); // Paramètre positionnel plus simple
+        $licenceData = $stmt->fetch(PDO::FETCH_ASSOC);
+    
+        if (!$licenceData) {
+            return null;
         }
-        return null;
+    
+        return new Licence(
+            $licenceData['id'],
+            $licenceData['title'],
+            $licenceData['description'],
+            $licenceData['availability'],
+            $licenceData['picture'],
+            $licenceData['price'],
+            $licenceData['id_user']
+        );
     }
     // Getters et Setters
     public function getId(): ?int

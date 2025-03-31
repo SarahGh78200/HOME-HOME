@@ -291,28 +291,6 @@ private function uploadPicture(): ?string
 
     return null; // Retourner null en cas d'échec
 }
-public function showContactVendeur()
-{
-    $licenceId = $_GET['licenceId'] ?? null; // Récupérer l'ID de la licence de l'URL
-    if (!$licenceId) {
-        // Gérer le cas où l'ID de la licence est manquant
-        header("Location: /");
-        exit;
-    }
-
-    // Récupérer la licence et les informations du vendeur
-    $licence = Licence::findById($licenceId); // Trouver la licence
-    $userInfo = (new User())->getUserByLicenceId($licenceId); // Trouver les infos du vendeur
-
-    // Vérifier si les données existent
-    if (!$licence || !$userInfo) {
-        header("Location: /"); // Si la licence ou le vendeur n'existe pas
-        exit;
-    }
-
-    // Passer les données à la vue
-    require_once(__DIR__ . '/../views/contactVendeur.php');
-}
 
 
 

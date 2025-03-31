@@ -169,7 +169,62 @@ class UserController extends AbstractController
         require __DIR__ . '/../Views/User/editProfilUser.view.php';
     }
     
-  
+    public function showContactVendeur()
+    {
+        $licenceId = $_GET['licenceId'] ?? null; // Récupérer l'ID de la licence de l'URL
+        if (!$licenceId) {
+            // Gérer le cas où l'ID de la licence est manquant
+            header("Location: /");
+            exit;
+        }
     
+        // Récupérer la licence et les informations du vendeur
+        $licence = Licence::findById($licenceId); // Trouver la licence
+        $userInfo = (new User())->getUserByLicenceId($licenceId); // Trouver les infos du vendeur
     
+        // Vérifier si les données existent
+        if (!$licence || !$userInfo) {
+            header("Location: /"); // Si la licence ou le vendeur n'existe pas
+            exit;
+        }
+    
+        // Passer les données à la vue
+        require_once(__DIR__ . '/../views/contactVendeur.php');
+    }
+    
+    public function envoyerMessage()
+    {
+        if ($_SERVER['REQUEST_METHOD'] !== 'POST') {
+            header('Location: /');
+            exit();
+        }
+    
+        $vendeurId = $_POST['vendeur_id'];
+        $message = trim($_POST['message']);
+        
+        // Ici vous pourriez:
+        // 1. Envoyer un email au vendeur
+        // 2. Sauvegarder le message en BDD
+        // 3. Rediriger avec un message de succès
+        
+        $_SESSION['success'] = "Votre message a été envoyé !";
+        header('Location: /licenceDetail?id=' . $_POST['licence_id']);
+        exit();
+    }
+    // src/Controllers/UserController.php
+public function contactVendeur(int $licenceId) {
+    // 1. Récupérer la licence et le vendeur
+    $licence = Licence::findById($licenceId);
+    if (!$licence) {
+        header("Location: /erreur?message=Licence non trouvée");
+        exit();
+    }
+
+    $vendeur = User::findById($licence->getUserId());
+    
+    // 2. Afficher la vue
+    require_once __DIR__ . '/../Views/User/contactVendeur.view.php';
+}
+
+
 }

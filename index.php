@@ -31,6 +31,9 @@ $router->addRoute('/editLicence', 'LicenceController', 'editLicence');
 $router->addRoute('/updateLicence', 'LicenceController', 'updateLicence'); // Ajout de la route manquante
 $router->addRoute('/deleteLicence', 'LicenceController', 'deleteLicence');
 // Ajoute cette route pour la page Contact Vendeur
-$router->addRoute('/contactVendeur', 'LicenceController', 'showContactVendeur');
-
+// $router->addRoute('/contactVendeur', 'UserController', 'Voirprofil');
+// // $router->addRoute('/contactVendeur/:id', 'UserController', 'voirProfil');
+// $router->addRoute('/contactVendeur/:id', 'UserController', 'profil');
+$router->addRoute('/contact-vendeur/:licenceId', 'UserController', 'contactVendeur');
+$router->addRoute('/contact-vendeur/:id', 'UserController', 'contactVendeur');
 $router->handleRequest();
