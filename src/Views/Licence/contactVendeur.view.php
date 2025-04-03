@@ -1,5 +1,4 @@
-<?php require_once(__DIR__ . '/../partials/head.php'); ?>
-
+q
 <div class="container">
     <h1>Contacter le vendeur</h1>
     

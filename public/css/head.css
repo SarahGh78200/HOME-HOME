@@ -1,31 +1,45 @@
+body{
+    font-family: "Poppins", sans-serif;
+    font-weight: 100;
+    font-style: normal;
 
-/* body {
-    margin: 0;
-    font-family: Arial, sans-serif;
-} */
+}
+
 
 .custom-navbar1 {
     display: flex;
     align-items: center;
+    justify-content: center;
     background-color: rgba(51, 51, 51, 0.8); /* Fond semi-transparent */
-    padding: 10px 20px;
+    padding: 30px 20px;
     color: white;
     width: 100%;
     top: 0;
     z-index: 1000;
+    position: relative;
+}
+
+/* Logo positionné à gauche */
+.custom-logo {
+    position: absolute;
+    left: 20px;
 }
 
 .custom-logo img {
     width: 50px;
     height: 50px;
-    margin-right: 10px;
 }
 
+/* Centrage de la navigation */
 .ulNav {
     list-style: none;
     display: flex;
     margin: 0;
     padding: 0;
+    position: absolute;
+    left: 50%;
+    transform: translateX(-50%);
+    background: transparent;
 }
 
 .ulNav li {
@@ -40,21 +54,25 @@
 }
 
 .ulNav li a:hover {
-    color: #ddd;
+    color: #1255d0;
 }
 
+/* Menu hamburger pour mobile */
 .custom-menu {
     display: none;
     font-size: 24px;
     cursor: pointer;
+    position: absolute;
+    right: 20px;
 }
 
-/* La div profilMenu sera poussée à l'extrémité droite */
+/* Profil à droite */
 .profilMenu {
-    margin-left: auto;
-    position: relative;
+    position: absolute;
+    right: 70px;
 }
 
+/* Dropdown du profil */
 .dropdown-menu {
     right: 0;
     left: auto;
@@ -72,17 +90,14 @@
     background-color: #555;
 }
 
+/* Responsive */
 @media (max-width: 768px) {
-    .custom-navbar {
-        flex-direction: column;
-    }
-
     .ulNav {
-        display: none;
+        display: none; /* Cache le menu par défaut */
         flex-direction: column;
         position: absolute;
         top: 60px;
-        left: 0;
+     
         width: 100%;
         background: rgba(51, 51, 51, 0.9);
         text-align: center;
@@ -90,16 +105,12 @@
     }
 
     .ulNav.active {
-        display: flex;
+        display: flex; /* Affiche le menu quand actif */
     }
 
     .custom-menu {
         display: block;
-    }
-
-    /* Pour que le dropdown reste en dehors du menu mobile, on peut adapter si besoin */
-    .profilMenu {
-        margin-left: 0;
-        margin-top: 10px;
+        position: absolute;
+        right: 20px;
     }
 }
