@@ -35,13 +35,13 @@ class LoginController extends AbstractController
                         $this->errors['password'] = "Mot de passe incorrect ou adresse mail incorrect";
                     }
                 } else {
-                    $this->errors['email'] = "Cet email n'existe pas.";
+                    $this->errors['email'] = "Mot de passe incorrect ou adresse mail incorrect ou inexistante  ";
                 }
             }
         }
 
         if (isset($_SESSION['user'])) {
-            $this->redirectToRoute('/');
+            $this->redirectToRoute('/profil');
         }
 
         // On passe $this->errors à la vue

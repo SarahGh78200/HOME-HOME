@@ -1,3 +1,4 @@
+
 <!DOCTYPE html>
 <html lang="fr">
 
@@ -24,7 +25,7 @@
         <ul class="ulNav" id="nav-links">
             <li><a href="/"><strong>Accueil</strong></a></li>
             <li><a href="/licence"><strong>Licence</strong></a></li>
-            <li><a href=""><strong>À propos</strong></a></li>
+            <li><a href="/src/Views/aPropos.views.php"><strong>À propos</strong></a></li>
             <li><a href="/src/Views/faq.views.php"><strong>Foire aux questions ?</strong></a></li>
             <li><a href=""><strong>Nous contacter</strong></a></li>
         </ul>
@@ -42,6 +43,7 @@
                     <li><a class="dropdown-item" href="/logout">Déconnexion</a></li>
                 <?php } else { ?>
                     <li><a class="dropdown-item" href="/login">Connexion</a></li>
+                    <li><a class="dropdown-item" href="/register">Inscription</a></li>
                 <?php } ?>
             </ul>
         </div>
