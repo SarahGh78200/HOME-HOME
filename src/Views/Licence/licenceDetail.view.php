@@ -2,17 +2,7 @@
 // Inclusion des fichiers partiels
 require_once(__DIR__ . '/../partials/head.php');
 ?>
-
-<!DOCTYPE html>
-<html lang="fr">
-
-<head>
-    <meta charset="UTF-8">
-    <title>Détails de la Licence</title>
-    <link rel="stylesheet" href="/public/css/licenceDetail.css">
-</head>
-
-<body>
+<main class="detailLicence.css">
 
     <h1>Détails de la Licence</h1>
 
@@ -33,9 +23,7 @@ require_once(__DIR__ . '/../partials/head.php');
 
     </div>
     </div>
+</main>
 
-</body>
-
-</html>
 
 <?php require_once(__DIR__ . '/../partials/footer.php'); ?>

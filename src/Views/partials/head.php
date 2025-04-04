@@ -12,11 +12,11 @@
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Kufam:ital,wght@0,400..900;1,400..900&family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&family=Quicksand:wght@300..700&display=swap" rel="stylesheet">
-    <link rel="stylesheet" href="/public/css/head.css">
+    <link rel="stylesheet" href="/public/css/main.css">
 
 </head>
 
-<body>
+<body class="Headbody">
     <nav class="custom-navbar1">
         <div class="custom-logo">
             <a href="/"><img src="/public/img/logo2.png" alt="Logo"></a>
@@ -54,6 +54,3 @@
             document.getElementById('nav-links').classList.toggle('active');
         }
     </script>
-</body>
-
-</html>

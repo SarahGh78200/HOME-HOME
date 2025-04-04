@@ -1,18 +1,8 @@
 <?php
 require_once(__DIR__ . '/../partials/head.php');
 ?>
-<!DOCTYPE html>
-<html lang="fr">
-
-<head>
-    <meta charset="UTF-8">
-    <title>Liste des licences</title>
-    <link rel="stylesheet" href="/public/css/styleLicence.css">
-</head>
-
-<body>
-
-    <h1>Annonces Licences</h1>
+<main class="licenceCss">
+    <h1 class="tittleAnnouncement">Annonces Licences</h1>
     <?php if (!empty($_SESSION['user'])) { ?>
         <?php if ($_SESSION['user']['idRole'] == 1 || $_SESSION['user']['idRole'] == 2) { ?>
             <button class="submit1"><a href="/addLicence"><strong>Ajouter une licence</strong></a></button>
@@ -47,8 +37,6 @@ require_once(__DIR__ . '/../partials/head.php');
     <?php else: ?>
         <p>Aucune licence disponible.</p>
     <?php endif; ?>
+</main>
 
-</body>
-
-</html>
-<?php require_once(__DIR__ . '/../partials/footer.php'); ?>
+<?php require_once(__DIR__ . '/../partials/footer.php'); 

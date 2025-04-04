@@ -3,17 +3,8 @@
 require_once(__DIR__ . '/../partials/head.php');
 ?>
 
-<!DOCTYPE html>
-<html lang="fr">
 
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Profil de <?= htmlspecialchars($user->getName()) ?></title>
-    <link rel="stylesheet" href="/public/css/styleProfil.css">
-</head>
-
-<body>
+<main class="profilCss">
     <h1 class="tittleProfil">Profil de <?= htmlspecialchars($user->getName()) ?></h1>
     <div class="profil">
         <p><strong>Nom :</strong> <?= htmlspecialchars($user->getSurname()) ?></p>
@@ -29,8 +20,7 @@ require_once(__DIR__ . '/../partials/head.php');
     <div class="buttonMyLicence">
         <a href="/licenceUser"> Mes Licences</a>
     </div>
+</main>
 
-</body>
-</html>
 
 <?php require_once(__DIR__ . '/../partials/footer.php'); ?>

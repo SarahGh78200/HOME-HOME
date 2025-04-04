@@ -1,5 +1,5 @@
 /* Style global */
-body {
+.editProfilCss{
     font-family: 'Arial', sans-serif;
     margin: 0;
     padding: 0;
@@ -69,13 +69,13 @@ button[type="submit"]:hover {
     background-color: #2ecc71;
 }
 
-/* Affichage des erreurs */
+/* Affichage des erreurs
 p {
     color: red;
     font-size: 1.1em;
     font-weight: bold;
     text-align: center;
-}
+} */
 
 /* Style responsive pour les petits écrans */
 @media (max-width: 768px) {

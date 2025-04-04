@@ -1,14 +1,9 @@
+<?php
+// Inclusion des fichiers partiels
+require_once(__DIR__ . '/partials/head.php');
+?>
 
-
-<head>
-
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>FAQ - Location & Achat de Licences de Taxi</title>
-<link rel="stylesheet" href="/public/css/faq.css">
-
-</head
-<body>
+<main class="bodyfaqCss">
 
     <div class="faq-container">
         <h2>Foire Aux Questions (FAQ)</h2>
@@ -37,6 +32,27 @@
             <div class="faq-question">Comment créer un compte sur votre site ? <span>+</span></div>
             <div class="faq-answer">Cliquez sur "S'inscrire", remplissez les informations demandées et validez votre inscription.</div>
         </div>
+
+        <div class="faq-item">
+            <div class="faq-question">Quels sont les moyens de paiement acceptés sur la plateforme ? <span>+</span></div>
+            <div class="faq-answer">Nous acceptons les paiements par carte bancaire, virement et certaines plateformes de paiement en ligne.</div>
+        </div>
+
+        <div class="faq-item">
+            <div class="faq-question">Puis-je modifier ou annuler une location après réservation ? <span>+</span></div>
+            <div class="faq-answer">Oui, selon les conditions définies par le propriétaire de la licence. Consultez les modalités avant toute réservation.</div>
+        </div>
+
+        <div class="faq-item">
+            <div class="faq-question">Y a-t-il des frais supplémentaires pour utiliser la plateforme ? <span>+</span></div>
+            <div class="faq-answer">L’inscription est gratuite, mais des frais peuvent s’appliquer pour certaines transactions ou services premium.</div>
+        </div>
+
+        <div class="faq-item">
+            <div class="faq-question">Comment contacter le support en cas de problème ? <span>+</span></div>
+            <div class="faq-answer">Vous pouvez nous joindre via le formulaire de contact sur notre site ou par e-mail à [adresse support].</div>
+        </div>
+
     </div>
 
     <script>
@@ -54,6 +70,9 @@
             });
         });
     </script>
-</body>
 
-</html>
+</main>
+
+<?php
+require_once __DIR__ . '/partials/footer.php';
+?>

@@ -1,15 +1,6 @@
 <?php require_once(__DIR__ . '/../partials/head.php'); ?>
-<!DOCTYPE html>
-<html lang="fr">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Mes Licences</title>
-    <link rel="stylesheet" href="/public/css/styleEditProfil.css">
-</head>
-<body>
-    
 
+<main class="editProfilCss">
 <h2>Modifier mon profil</h2>
 
 <?php if (isset($errorMessage)): ?>
@@ -32,6 +23,5 @@
 
     <button type="submit">Enregistrer</button>
 </form>
-
+</main>
 <?php require_once __DIR__ . '/../partials/footer.php'; ?>
-</body>

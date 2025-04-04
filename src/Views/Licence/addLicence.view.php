@@ -14,7 +14,7 @@ require_once(__DIR__ . '/../partials/head.php');
 </head>
 
 <body>
-    <h1>Ajouter une licence</h1>
+    <h1 class="titleAddLicence">Ajouter une licence</h1>
 
     <!-- Affichage des messages de succès ou d'erreur -->
     <?php if (!empty($errors)) { ?>

@@ -62,7 +62,7 @@
     
     /* Tablettes (768px et moins) */
     @media screen and (max-width: 768px) {
-        h1 {
+        .tittleConnect {
             font-size: 1.8rem;
         }
         
@@ -73,7 +73,7 @@
     
     /* Mobiles (480px et moins) */
     @media screen and (max-width: 480px) {
-        h1 {
+        .tittleConnect {
             font-size: 1.5rem;
         }
         

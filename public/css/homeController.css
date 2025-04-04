@@ -10,18 +10,23 @@
 
 /* Vidéo en arrière-plan */
 .video-background {
-    position: absolute; /* Change de fixed à absolute pour permettre le scroll */
+
     top: 0;
     left: 0;
     width: 100%;
     height: 100%;
     object-fit: cover;
-    z-index: -1;
+    z-index: -1; 
 }
 
 /* Contenu principal */
 .content {
-    position: relative;
+    
+    position: absolute;
+    top:139px;
+    left: 222px;
+    width: 100%;
+
     z-index: 1;
     background: rgba(0, 0, 0, 0.6); /* Fond semi-transparent noir */
     color: white;

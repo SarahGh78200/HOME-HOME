@@ -1,4 +1,4 @@
-body {
+.css404 {
     font-family: 'Arial', sans-serif;
     background-color: #f4f4f9;
     text-align: center;
@@ -6,7 +6,7 @@ body {
     padding: 0;
 }
 
-.container {
+.container404css {
     max-width: 600px;
     margin: 100px auto;
     padding: 20px;
@@ -15,13 +15,13 @@ body {
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
 }
 
-h1 {
+.tittle404 {
     font-size: 80px;
     color: #e74c3c;
     margin: 0;
 }
 
-p {
+.p404css {
     font-size: 18px;
     color: #555;
     margin: 10px 0;

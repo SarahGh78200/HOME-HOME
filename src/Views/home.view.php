@@ -2,15 +2,8 @@
 require_once(__DIR__ . '/partials/head.php');
 ?>
 
-<!DOCTYPE html>
-<html lang="fr">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Free Moove Driver</title>
-    <link rel="stylesheet" href="/public/css/homeController.css">
-</head>
-<body class="bodyController">
+
+<main class="bodyController">
 
     <!-- Vidéo en background -->
     <video class="video-background" autoplay muted loop>
@@ -76,10 +69,8 @@ require_once(__DIR__ . '/partials/head.php');
             <p>Vous pouvez louer une licence directement sur notre plateforme auprès d’un propriétaire.</p>
         </details>
     </section>
-
+</main>
     <?php
  
- require_once __DIR__ . '/../partials/footer.php';
+ require_once __DIR__ . '/partials/footer.php';
     ?>
-</body>
-</html>
