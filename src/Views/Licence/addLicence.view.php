@@ -2,18 +2,9 @@
 // Inclusion des fichiers partiels
 require_once(__DIR__ . '/../partials/head.php');
 ?>
-<!DOCTYPE html>
-<html lang="en">
 
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
-    <link rel="stylesheet" href="/public/css/addLicence.css">
-</head>
+<main class="addlicenceCSS">
 
-<body>
     <h1 class="titleAddLicence">Ajouter une licence</h1>
 
     <!-- Affichage des messages de succès ou d'erreur -->
@@ -42,11 +33,7 @@ require_once(__DIR__ . '/../partials/head.php');
                     <p class="text-danger"><?= htmlspecialchars($errors['title']) ?></p>
                 <?php } ?>
             </div>
-
-
-
-
-            <!-- Champ Description -->
+          <!-- Champ Description -->
             <div class="mb-3">
                 <label for="description" class="form-label">Description</label>
                 <textarea class="form-control" id="description" name="description" rows="4" required><?= htmlspecialchars($description) ?></textarea>
@@ -72,7 +59,7 @@ require_once(__DIR__ . '/../partials/head.php');
                     <p class="text-danger"><?= htmlspecialchars($errors['price']) ?></p>
                 <?php } ?>
             </div>
-            
+
             <div class="btnSubmit">
                 <button type="submit" class="btn btn-primary mt-5 mb-5 text-center">Ajouter la licence</button>
             </div>
@@ -80,10 +67,8 @@ require_once(__DIR__ . '/../partials/head.php');
         </div>
     </form>
 
+</main>
     <?php
     // Inclusion du pied de page
     require_once(__DIR__ . '/../partials/footer.php');
     ?>
-</body>
-
-</html>

@@ -1,4 +1,4 @@
-q
+
 <div class="container">
     <h1>Contacter le vendeur</h1>
     

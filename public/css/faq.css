@@ -3,6 +3,7 @@
     margin: 20px;
     background-color: #f4f4f4;
 }
+
 .faq-container {
     max-width: 800px;
     margin: auto;
@@ -11,11 +12,18 @@
     border-radius: 8px;
     box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
 }
+
 .faq-item {
     border-bottom: 1px solid #ddd;
     padding: 10px 0;
 }
-.faq-question {
+
+.faq-item:last-child {
+    border-bottom: none;
+}
+
+/* Style pour la question */
+.faq-item summary {
     font-size: 18px;
     font-weight: bold;
     cursor: pointer;
@@ -23,9 +31,47 @@
     display: flex;
     justify-content: space-between;
     align-items: center;
+    list-style: none;
+    position: relative;
+    padding-right: 20px;
 }
-.faq-answer {
+
+/* Supprime la flèche par défaut */
+.faq-item summary::-webkit-details-marker {
     display: none;
-    padding-top: 5px;
-    color: #555;
 }
+
+/* Icône + / - */
+/* .faq-item summary::after {
+    content: "+";
+    position: absolute;
+    right: 0;
+    font-size: 20px;
+    transition: transform 0.3s ease;
+} */
+
+/* Quand la réponse est visible, remplace + par -
+.faq-item[open] summary::after {
+    content: "-";
+} */
+
+/* Style pour la réponse */
+.faq-item p {
+    padding-top: 5px;
+    padding-left: 5px;
+    color: #555;
+    animation: fadeIn 0.3s ease-in-out;
+    margin: 0;
+}
+
+/* Animation douce
+@keyframes fadeIn {
+    from {
+        opacity: 0;
+        transform: translateY(-5px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+} */

@@ -27,7 +27,7 @@
             <li><a href="/licence"><strong>Licence</strong></a></li>
             <li><a href="/src/Views/aPropos.views.php"><strong>À propos</strong></a></li>
             <li><a href="/src/Views/faq.views.php"><strong>Foire aux questions ?</strong></a></li>
-            <li><a href=""><strong>Nous contacter</strong></a></li>
+            <li><a href="/src/Views/contact.view.php"><strong>Nous contacter</strong></a></li>
         </ul>
 
         <div class="profilMenu dropdown">

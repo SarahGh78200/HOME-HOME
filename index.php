@@ -36,4 +36,6 @@ $router->addRoute('/deleteLicence', 'LicenceController', 'deleteLicence');
 // $router->addRoute('/contactVendeur/:id', 'UserController', 'profil');
 $router->addRoute('/contact-vendeur/:licenceId', 'UserController', 'contactVendeur');
 $router->addRoute('/contact-vendeur/:id', 'UserController', 'contactVendeur');
+$router->addRoute('/contact', 'ContactController', 'index');
+
 $router->handleRequest();

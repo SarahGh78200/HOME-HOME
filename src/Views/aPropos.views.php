@@ -40,10 +40,13 @@ require_once(__DIR__ . '/partials/head.php');
             <li><span class="highlight">🤝 Accompagnement personnalisé</span></li>
         </ul>
         
-        <a href="#" class="cta">Rejoignez Free Moove maintenant !</a>
+        <a href="/register" class="cta">Rejoignez Free Moove maintenant !</a>
     </div>
 </main>
 <?php
  
  require_once __DIR__ . '/partials/footer.php';
     ?>
+
+        <!-- *dcyc btzs enea fwdx -->
+         <!-- */ybyc jexf ijiw tzzy -->
