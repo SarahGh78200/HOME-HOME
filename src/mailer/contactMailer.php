@@ -15,7 +15,7 @@ class contactMailer
             $mail->isSMTP();
             $mail->Host = 'smtp.gmail.com';
             $mail->SMTPAuth = true;
-            $mail->Username = 'freemoovedriver1@gmail.com'; // Email PRO
+            $mail->Username = 'freemoovedriver1@gmail.com'; // Email
             $mail->Password = 'ybyc jexf ijiw tzzy'; // MDP DE L'APPLICATION
             $mail->SMTPSecure = PHPMailer::ENCRYPTION_SMTPS;
             $mail->Port = 465;
@@ -27,7 +27,7 @@ class contactMailer
             $mail->Subject = "Message de contact";
             $mail->Body = "<strong>Nom :</strong> $nom<br><strong>Email :</strong> $email<br><strong>Message :</strong><br>" . nl2br($message);
             $mail->AltBody = "Name : $nom\nEmail : $email\nMessage :\n$message";
-&&s
+
             $mail->send();
             return true;
         } catch (Exception $e) {
