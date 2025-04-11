@@ -13,16 +13,14 @@ class ContactController
         $errorMessage = '';
 
         if ($_SERVER["REQUEST_METHOD"] === "POST") {
-            $name= htmlspecialchars($_POST['name']);
-            $object= htmlspecialchars(($_POST)['objet']);
-            
+            $nom= htmlspecialchars($_POST['nom']);
             $email = htmlspecialchars($_POST['email']);
             $message = htmlspecialchars($_POST['message']);
 
             if (!empty($nom) && !empty($email) && !empty($message)) {
                 $mailer = new contactMailer();
 
-                if ($mailer->send($name,$object, $email, $message)) {
+                if ($mailer->send($nom, $email, $message)) {
                     $successMessage = "Votre message a bien été envoyé. Nous vous répondrons rapidement.";
                 } else {
                     $errorMessage = "Erreur lors de l'envoi du message. Veuillez réessayer plus tard.";

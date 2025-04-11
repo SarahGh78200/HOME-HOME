@@ -31,21 +31,27 @@
         </ul>
 
         <div class="profilMenu dropdown">
-            <a href="#" class="dropdown-toggle" id="profileDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+            <a href="" class="dropdown-toggle" id="profileDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
                 <i class="fas fa-user-circle"></i>
                 <?php if (!empty($_SESSION['user'])) { ?>
                     <span><?php echo htmlspecialchars($_SESSION['user']['surname'] . ' ' . $_SESSION['user']['name']); ?></span>
                 <?php } ?>
             </a>
             <ul class="dropdown-menu" aria-labelledby="profileDropdown">
-                <?php if (!empty($_SESSION['user'])) { ?>
-                    <li><a class="dropdown-item" href="/profil">Profil</a></li>
-                    <li><a class="dropdown-item" href="/logout">Déconnexion</a></li>
-                <?php } else { ?>
-                    <li><a class="dropdown-item" href="/login">Connexion</a></li>
-                    <li><a class="dropdown-item" href="/register">Inscription</a></li>
-                <?php } ?>
-            </ul>
+    <?php if (!empty($_SESSION['user'])) { ?>
+        <!-- Afficher le Dashboard UNIQUEMENT si l'utilisateur a idRole == 1 -->
+        <?php if ($_SESSION['user']['idRole'] == 1) { ?>
+            <li><a class="dropdown-item" href="/admin/dashboard
+            "><i class="fas fa-tachometer-alt"></i> Dashboard</a></li>
+            <li><hr class="dropdown-divider"></li>
+        <?php } ?>
+        <li><a class="dropdown-item" href="/profil"><i class="fas fa-user"></i> Profil</a></li>
+        <li><a class="dropdown-item" href="/logout"><i class="fas fa-sign-out-alt"></i> Déconnexion</a></li>
+    <?php } else { ?>
+        <li><a class="dropdown-item" href="/login"><i class="fas fa-sign-in-alt"></i> Connexion</a></li>
+        <li><a class="dropdown-item" href="/register"><i class="fas fa-user-plus"></i> Inscription</a></li>
+    <?php } ?>
+</ul>
         </div>
     </nav>
 

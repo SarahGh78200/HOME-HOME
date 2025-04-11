@@ -1,72 +1,224 @@
-/* Applique un style général */
+/* STYLE GÉNÉRAL */
 .bodyController {
     font-family: Arial, sans-serif;
     text-align: center;
     background-color: #f8f9fa;
-   
-    overflow-x: hidden; /* Permet le scroll vertical tout en évitant un débordement horizontal */
-    min-height: 100vh; /* S'assure que le site peut défiler */
+    overflow-x: hidden;
+    min-height: 100vh;
 }
 
-/* Vidéo en arrière-plan */
+/* VIDÉO EN FOND */
 .video-background {
-
+    position: absolute; /* PAS fixed ici */
     top: 0;
     left: 0;
     width: 100%;
     height: 100%;
     object-fit: cover;
-    z-index: -1; 
+    z-index: -1;
 }
 
-/* Contenu principal */
+/* CONTENU PRINCIPAL */
 .content {
-    
-    position: absolute;
-    top:139px;
-    left: 222px;
-    width: 100%;
-
-    z-index: 1;
-    background: rgba(0, 0, 0, 0.6); /* Fond semi-transparent noir */
+    position: relative; /* au lieu de absolute */
+    margin: 150px auto 40px auto; /* marge top pour laisser voir la vidéo */
+    width: 90%;
+    max-width: 1000px;
+    background: rgba(0, 0, 0, 0.6);
     color: white;
     border-radius: 15px;
-    max-width: 80%;
-    margin: auto; /* Ajout de marge pour espacer du haut */
+    padding: 30px 20px;
+    z-index: 1;
     box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.3);
- 
 }
 
-/* Image fixée en haut */
+
+/* IMAGE HAUT */
 .content::before {
     content: "";
     display: block;
     width: 100%;
-    height: 200px;
-    background: url('/public/images/reconversion.jpg') no-repeat center top;
+    height: 180px;
+    background: url('/public/images/reconversion.jpg') no-repeat center;
     background-size: contain;
-    position: relative;
-    margin-bottom: 20px; /* Ajout d'espace entre l'image et le texte */
-    margin-top: 23px;
+    margin-bottom: 20px;
 }
 
-/* Ajout de l'image de la licence en bas du bloc */
+/* IMAGE BAS */
 .content::after {
     content: "";
     display: block;
     width: 100%;
-    height: 200px; /* Ajuste la taille selon ton besoin */
+    height: 180px;
     background: url('/public/images/licence-taxi.jpg') no-repeat center bottom;
     background-size: contain;
-    position: relative;
-    margin-top: 20px; /* Ajout d'espace entre le texte et l'image */
+    margin-top: 20px;
 }
 
-/* Style du texte */
-h1 span {
+/* TITRE */
+.titlehome {
+    padding-top: 10px;
+    font-size: 2em;
+}
+
+.titlehome span {
     color: #007BFF;
 }
 
-h1 {
-    padding-top: 20px;
+/* CTA */
+.cta-button {
+    display: inline-block;
+    background-color: #007BFF;
+    color: white;
+    padding: 12px 24px;
+    border-radius: 8px;
+    text-decoration: none;
+    font-weight: bold;
+    margin-top: 20px;
+    transition: background 0.3s ease;
+}
+
+.cta-button:hover {
+    background-color: #0056b3;
+}
+
+/* SECTION : COMMENT ÇA MARCHE */
+.how-it-works {
+    padding: 60px 20px;
+    background-color: rgba(255, 255, 255, 0.95);
+    border-radius: 15px;
+    max-width: 1100px;
+    margin: 50px auto;
+    position: relative;
+    z-index: 2;
+}
+
+.steps {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 25px;
+    margin-top: 40px;
+}
+
+.step {
+    background-color: #f1f1f1;
+    padding: 20px;
+    border-radius: 12px;
+    width: 280px;
+    max-width: 100%;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.05);
+    transition: transform 0.3s ease;
+}
+
+.step:hover {
+    transform: translateY(-5px);
+}
+
+.step h3 {
+    color: #007BFF;
+}
+
+/* SECTION : TÉMOIGNAGES */
+.testimonials {
+    padding: 60px 20px;
+    background-color: rgba(255, 255, 255, 0.95);
+    border-radius: 15px;
+    max-width: 1000px;
+    margin: 40px auto;
+    position: relative;
+    z-index: 2;
+}
+
+.testimonial-list blockquote {
+    background-color: #ffffff;
+    border-left: 5px solid #007BFF;
+    margin: 20px auto;
+    padding: 20px;
+    font-style: italic;
+    border-radius: 8px;
+    max-width: 700px;
+    box-shadow: 0 4px 8px rgba(0,0,0,0.05);
+}
+
+/* SECTION : FAQ */
+.faq {
+    padding: 50px 20px;
+    background-color: rgba(255, 255, 255, 0.95);
+    border-radius: 15px;
+    max-width: 900px;
+    margin: 40px auto;
+    position: relative;
+    z-index: 2;
+}
+
+.faq details {
+    background: #f1f1f1;
+    margin: 10px 0;
+    padding: 15px 20px;
+    border-radius: 8px;
+    cursor: pointer;
+    transition: background 0.3s ease;
+}
+
+.faq details[open] {
+    background: #e9ecef;
+}
+
+.faq summary {
+    font-weight: bold;
+    color: #007BFF;
+    font-size: 1.1em;
+    margin-bottom: 8px;
+}
+
+/* RESPONSIVE DESIGN */
+@media screen and (max-width: 768px) {
+    .content {
+        top: 120px;
+        padding: 20px 15px;
+    }
+
+    .content::before,
+    .content::after {
+        height: 120px;
+        background-size: cover;
+    }
+
+    .titlehome {
+        font-size: 1.5em;
+    }
+
+    .steps {
+        flex-direction: column;
+        align-items: center;
+    }
+
+    .step {
+        width: 90%;
+    }
+
+    .testimonial-list blockquote {
+        padding: 15px;
+    }
+
+    .faq summary {
+        font-size: 1em;
+    }
+}
+
+@media screen and (max-width: 480px) {
+    .titlehome {
+        font-size: 1.2em;
+    }
+
+    .cta-button {
+        padding: 10px 16px;
+        font-size: 0.9em;
+    }
+
+    .content::before,
+    .content::after {
+        height: 100px;
+    }
 }

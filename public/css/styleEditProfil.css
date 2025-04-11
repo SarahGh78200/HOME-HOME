@@ -8,7 +8,7 @@
 }
 
 /* Conteneur principal */
-h2 {
+.title2profil {
     text-align: center;
     font-size: 2em;
     color: #2c3e50;
@@ -17,7 +17,7 @@ h2 {
 }
 
 /* Formulaire de modification du profil */
-form {
+.licenceform{
     background-color: #fff;
     padding: 30px;
     border-radius: 8px;
@@ -52,7 +52,7 @@ input[type="text"]:focus, input[type="email"]:focus {
 }
 
 /* Bouton de soumission */
-button[type="submit"] {
+.buttonEditProfil {
     padding: 12px 25px;
     background-color: #27ae60;
     color: white;
@@ -79,18 +79,18 @@ p {
 
 /* Style responsive pour les petits écrans */
 @media (max-width: 768px) {
-    form {
+    .licenceform {
         padding: 20px;
         width: 90%;
     }
 
-    h2 {
+   .title2profil {
         font-size: 1.8em;
     }
 }
 
 @media (max-width: 480px) {
-    form {
+    .licenceform {
         padding: 15px;
     }
 }

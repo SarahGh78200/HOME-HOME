@@ -244,7 +244,43 @@ public static function findById(int $id): ?self
         $userData['id_role'],
         $userData['email']
     );
+
+    
 }
+public function deleteUser(): bool
+{
+    $pdo = DataBase::getConnection();
+    $pdo->beginTransaction();
+
+    try {
+        // Supprimer les licences de l'utilisateur
+        $sql1 = "DELETE FROM licence WHERE id_user = ?";
+        $stmt1 = $pdo->prepare($sql1);
+        $stmt1->execute([$this->id]);
+
+        // Supprimer l'utilisateur
+        $sql2 = "DELETE FROM user WHERE id = ?";
+        $stmt2 = $pdo->prepare($sql2);
+        $stmt2->execute([$this->id]);
+
+        $pdo->commit();
+        return true;
+    } catch (\Exception $e) {
+        $pdo->rollBack();
+        throw $e;
+    }
+}
+
+
+
+public static function getAll()
+{
+    $pdo = DataBase::getConnection(); // ✅ cohérent avec le reste
+
+    $stmt = $pdo->query("SELECT * FROM user");
+    return $stmt->fetchAll(\PDO::FETCH_CLASS, self::class);
+}
+
 
 
     // Getters et Setters

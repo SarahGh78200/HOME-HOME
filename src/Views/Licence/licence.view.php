@@ -25,7 +25,7 @@ require_once(__DIR__ . '/../partials/head.php');
 
                         <!-- Bouton Acheter -->
                         <!-- Bouton Acheter -->
-                        <form action="/licenceDetail" method="get">
+                        <form class="formLicence" action="/licenceDetail" method="get">
                             <input type="hidden" name="id" value="<?= $licence->getId(); ?>">
                             <button type="submit" class="buy-button">Réservé</button>
                         </form>

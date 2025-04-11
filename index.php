@@ -30,12 +30,19 @@ $router->addRoute('/licence', 'LicenceController', 'readLicence');
 $router->addRoute('/editLicence', 'LicenceController', 'editLicence');
 $router->addRoute('/updateLicence', 'LicenceController', 'updateLicence'); // Ajout de la route manquante
 $router->addRoute('/deleteLicence', 'LicenceController', 'deleteLicence');
-// Ajoute cette route pour la page Contact Vendeur
-// $router->addRoute('/contactVendeur', 'UserController', 'Voirprofil');
-// // $router->addRoute('/contactVendeur/:id', 'UserController', 'voirProfil');
-// $router->addRoute('/contactVendeur/:id', 'UserController', 'profil');
+//CONTACT VENDEUR 
 $router->addRoute('/contact-vendeur/:licenceId', 'UserController', 'contactVendeur');
 $router->addRoute('/contact-vendeur/:id', 'UserController', 'contactVendeur');
+//CONTACT ADMIN 
 $router->addRoute('/contact', 'ContactController', 'index');
+// $router->addRoute('/admin', 'UserController', 'dashboardAdmin');
+// Dashboard Admin complet
+$router->addRoute('/admin/dashboard', 'AdminController', 'dashboard');
+
+// Supprimer un utilisateur
+$router->addRoute('/admin/deleteUser', 'AdminController', 'deleteUser');
+
+// Supprimer une licence
+$router->addRoute('/admin/deleteLicence', 'AdminController', 'deleteLicence');
 
 $router->handleRequest();

@@ -44,9 +44,7 @@ require_once(__DIR__ . "/../partials/head.php");
                 <p class='text-danger'><?= htmlspecialchars($errors['birth_date']) ?></p>
             <?php } ?>
         </div>
-        <!-- Pas de sélection de rôle, l'utilisateur sera toujours un "Client" sauf si spécifié dans le code -->
-        <input type="hidden" name="idRole" value="2"> <!-- 2 pour "Client" par défaut -->
-
+      
         <button class="boutons" type="submit">Inscription</button>
     </form>
 </div>

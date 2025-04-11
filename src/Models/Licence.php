@@ -59,10 +59,10 @@ class Licence
     public function updateLicence()
     {
         $db = Database::getConnection();
-        // Requête SQL pour mettre à jour la licence avec la disponibilité
         $query = $db->prepare("UPDATE licence SET title = ?, description = ?, availability = ?, picture = ?, price = ? WHERE id = ?");
         return $query->execute([$this->title, $this->description, $this->availability, $this->picture, $this->price, $this->id]);
     }
+    
     
     public function deleteLicence(): bool
     {
@@ -124,6 +124,31 @@ class Licence
             $licenceData['id_user']
         );
     }
+    public static function findAll(): array
+    {
+        $pdo = DataBase::getConnection(); // Récupération de la connexion PDO
+        $stmt = $pdo->query("SELECT * FROM licence"); // Exécution de la requête pour récupérer toutes les licences
+        $licencesData = $stmt->fetchAll(PDO::FETCH_ASSOC); // Récupération des données sous forme de tableau associatif
+    
+        $licences = [];
+        foreach ($licencesData as $data) {
+            $licences[] = new Licence(
+                $data['id'],
+                $data['title'],
+                $data['description'],
+                $data['availability'],
+                $data['picture'],
+                $data['price'],
+                $data['id_user']
+            );
+        }
+    
+        return $licences; // Retourne un tableau d'objets Licence
+    }
+    
+
+
+
     // Getters et Setters
     public function getId(): ?int
     {
