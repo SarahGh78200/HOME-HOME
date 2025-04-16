@@ -6,7 +6,7 @@ require_once(__DIR__ . '/partials/head.php');
 <main class="bodyfaqCss">
 
     <div class="faq-container">
-        <h2>Foire Aux Questions (FAQ)</h2>
+        <h2><strong>Foire Aux Questions (FAQ)</strong></h2>
 
         <details class="faq-item">
             <summary>Comment puis-je louer une licence de taxi ?</summary>
@@ -54,6 +54,7 @@ require_once(__DIR__ . '/partials/head.php');
         </details>
 
     </div>
+    <button class="faqButton" type="button"><strong>Une question ? Contacter nous !</strong> </button>
 
 </main>
 

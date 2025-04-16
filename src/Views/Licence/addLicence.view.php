@@ -61,7 +61,7 @@ require_once(__DIR__ . '/../partials/head.php');
             </div>
 
             <div class="btnSubmit">
-                <button type="submit" class="btn btn-primary mt-5 mb-5 text-center">Ajouter la licence</button>
+                <button class= "buttonAddLicence"  type="submit" class="btn btn-primary mt-5 mb-5 text-center">Ajouter la licence</button>
             </div>
 
         </div>

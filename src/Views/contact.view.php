@@ -5,7 +5,7 @@ require_once(__DIR__ . '/partials/head.php');
 <main class="bodycontactCss">
     <div class="contact-container">
         <h2>Nous Contacter</h2>
-        <p>Vous avez une question ou une demande ? Remplissez le formulaire ci-dessous, nous vous répondrons rapidement.</p>
+        <p><strong>Vous avez une question ou une demande ? Remplissez le formulaire ci-dessous, nous vous répondrons rapidement.</strong></p>
 
         <?php if (!empty($name)) echo "<p style='color:green;'>$name</p>"; ?>
         <?php if (!empty($error)) echo "<p style='color:red;'>$error</p>"; ?>
@@ -31,7 +31,7 @@ require_once(__DIR__ . '/partials/head.php');
                 <textarea id="message" name="message" rows="5" required></textarea>
             </div>
 
-            <button type="submit">Envoyer</button>
+            <button class="buttonContact" type="submit">Envoyer</button>
         </form>
     </div>
 </main>

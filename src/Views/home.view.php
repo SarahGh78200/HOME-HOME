@@ -5,11 +5,7 @@ require_once(__DIR__ . '/partials/head.php');
 
 <main class="bodyController">
 
-    <!-- Vidéo en background -->
-    <video class="video-background" autoplay muted loop>
-        <source src="/public/video/taxi-presentation.mp4" type="video/mp4">
-        Votre navigateur ne supporte pas la lecture de vidéos.
-    </video>
+     
 
     <!-- Contenu avec fond semi-transparent -->
     <div class="content">

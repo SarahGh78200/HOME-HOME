@@ -3,14 +3,15 @@ require_once(__DIR__ . '/../partials/head.php');
 ?>
 <main class="licenceCss">
     <h1 class="tittleAnnouncement">Annonces Licences</h1>
+    <div class="buttonLicence1">
     <?php if (!empty($_SESSION['user'])) { ?>
         <?php if ($_SESSION['user']['idRole'] == 1 || $_SESSION['user']['idRole'] == 2) { ?>
-            <button class="submit1"><a href="/addLicence"><strong>Ajouter une licence</strong></a></button>
+            <button type="submit"><a href="/addLicence"  class="aLicence"> Ajouter une licence</a></button>
         <?php } ?>
     <?php } else { ?>
         <p class="LicenceAnnonce">Vous devez être connecté pour ajouter une licence.</p>
     <?php } ?>
-
+</div>
     <!-- Affichage des cartes -->
     <?php if (!empty($licences)): ?>
         <div class="licence-cards">

@@ -18,7 +18,7 @@ input, select, textarea {
     border-radius: 5px;
     font-size: 16px;
 }
-button {
+.buttonAddLicence {
     width: 100%;
     background-color: #007bff;
     color: white;

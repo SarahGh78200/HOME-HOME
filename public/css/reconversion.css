@@ -1,0 +1,46 @@
+.BodyReconversion {
+    font-family: 'Arial', sans-serif;
+    background-color: #f8f8f8;
+    margin: 0;
+    padding: 0;
+    color: #333;
+  }
+  header {
+    background-color: #1e90ff;
+    color: white;
+    padding: 40px 20px;
+    text-align: center;
+  }
+  .BodyReconversion {
+    max-width: 900px;
+    margin: 30px auto;
+    padding: 20px;
+    background-color: white;
+    border-radius: 12px;
+    box-shadow: 0 0 10px rgba(0,0,0,0.1);
+  }
+  h1, h2 {
+    color: #1e90ff;
+  }
+  .cta {
+    background-color: #1e90ff;
+    color: white;
+    padding: 12px 20px;
+    border-radius: 8px;
+    text-decoration: none;
+    display: inline-block;
+    margin: 10px 5px;
+    font-weight: bold;
+  }
+  .cta:hover {
+    background-color: #187bcd;
+  }
+  .section {
+    margin-bottom: 30px;
+  }
+  footer {
+    text-align: center;
+    margin-top: 50px;
+    font-size: 0.9em;
+    color: #777;
+  }
