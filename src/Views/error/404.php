@@ -1,4 +1,7 @@
-
+<?php
+// Inclusion des fichiers partiels
+require_once(__DIR__ . '/../partials/head.php');
+?>
 
 <main class="css404">
     <div class="container404css">

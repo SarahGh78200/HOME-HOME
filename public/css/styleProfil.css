@@ -33,28 +33,37 @@
     margin-bottom: 10px;
 }
 
-/* Boutons */
-.buttonMyLicence,
-.buttonEditProfile {
-    display: block;
-    text-align: center;
-    background-color: #000000;
-    color: rgb(255, 255, 255);
+/* Boutons modernisés */
+.buttonMyLicence button,
+.buttonEditProfile button {
+    display: inline-block;
+    width: 100%;
+    padding: 12px 20px;
+    background: linear-gradient(135deg, #000000, #333333);
+    color: #ffffff;
     font-weight: bold;
-    padding: 12px;
-    border-radius: 5px;
-    width: 80%;
-    max-width: 400px;
-    margin: 10px auto;
-    text-decoration: none;
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-    transition: background-color 0.3s ease, box-shadow 0.3s ease;
+    font-size: 16px;
+    border: none;
+    border-radius: 8px;
+    cursor: pointer;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+    transition: all 0.3s ease;
+    font-family: inherit;
 }
 
-.buttonMyLicence:hover,
-.buttonEditProfile:hover {
-    background-color: #0056b3;
-    box-shadow: 0 6px 12px rgba(0, 0, 0, 0.2);
+.buttonMyLicence button:hover,
+.buttonEditProfile button:hover {
+    background: linear-gradient(135deg, #1a1a1a, #555555);
+    transform: translateY(-2px);
+    box-shadow: 0 8px 16px rgba(0, 0, 0, 0.3);
+}
+
+.buttonMyLicence,
+.buttonEditProfile {
+    width: 80%;
+    max-width: 400px;
+    margin: 15px auto;
+    text-align: center;
 }
 
 /* Responsive Design */

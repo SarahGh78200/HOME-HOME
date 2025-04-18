@@ -3,7 +3,6 @@
 require_once(__DIR__ . '/../partials/head.php');
 ?>
 
-
 <main class="profilCss">
     <h1 class="tittleProfil">Profil de <?= htmlspecialchars($user->getName()) ?></h1>
     <div class="profil">
@@ -12,15 +11,13 @@ require_once(__DIR__ . '/../partials/head.php');
         <p><strong>Email :</strong> <?= htmlspecialchars($user->getEmail()) ?></p>
         <p><strong>Date de naissance :</strong> <?= htmlspecialchars($user->getBirthDate()) ?></p>
         <div class="buttonEditProfile">
-            <a href="/editProfilUser">Modifier mon profil</a>
+            <button onclick="window.location.href='/editProfilUser'">Modifier mon profil</button>
         </div>
-
     </div>
 
     <div class="buttonMyLicence">
-        <a href="/licenceUser"> Mes Licences</a>
+        <button onclick="window.location.href='/licenceUser'">Mes Licences</button>
     </div>
 </main>
-
 
 <?php require_once(__DIR__ . '/../partials/footer.php'); ?>

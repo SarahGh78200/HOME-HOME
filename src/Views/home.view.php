@@ -2,27 +2,26 @@
 require_once(__DIR__ . '/partials/head.php');
 ?>
 
-
 <main class="bodyController">
 
-     
+    
+<!-- 🔥 SECTION HERO AVEC VIDÉO EN BACKGROUND -->
+<section class="hero">
+    <video class="video-background" autoplay muted loop>
+        <source src="/public/video/taxi-presentation.mp4" type="video/mp4">
+        Votre navigateur ne supporte pas la vidéo HTML5.
+    </video>
 
-    <!-- Contenu avec fond semi-transparent -->
     <div class="content">
         <h1 class="titlehome">Bonjour et bienvenue sur <span>Free Moove Driver</span> !</h1>
         <p>Votre plateforme de reconversion professionnelle dans le métier de taxi.</p>
-
-        
         <p>Rejoignez notre réseau de conducteurs et louez ou achetez une licence pour démarrer votre nouvelle carrière.</p>
-        
- 
-        
         <p>Simple, rapide et sécurisé. Devenez conducteur dès aujourd'hui !</p>
-
         <a href="/src/Views/Reconvertion.views.php" class="cta-button">Commencez votre reconversion</a>
     </div>
+</section>
 
-    <!-- Section Comment ça marche ? -->
+    <!-- 🧭 COMMENT ÇA MARCHE -->
     <section class="how-it-works">
         <h2 class="titlehomeh2">🚀 Comment ça marche ?</h2>
         <div class="steps">
@@ -44,7 +43,7 @@ require_once(__DIR__ . '/partials/head.php');
         </div>
     </section>
 
-    <!-- Section Témoignages -->
+    <!-- 💬 TÉMOIGNAGES -->
     <section class="testimonials">
         <h2 class="titlehomeh2">💬 Ils ont réussi avec Free Moove</h2>
         <div class="testimonial-list">
@@ -59,7 +58,7 @@ require_once(__DIR__ . '/partials/head.php');
         </div>
     </section>
 
-    <!-- Section FAQ -->
+    <!-- ❓ FAQ -->
     <section class="faq">
         <h2 class="titlehomeh2">❓ Foire aux questions</h2>
         <details>
@@ -77,7 +76,5 @@ require_once(__DIR__ . '/partials/head.php');
     </section>
 
 </main>
-    <?php
- 
- require_once __DIR__ . '/partials/footer.php';
-    ?>
+
+<?php require_once __DIR__ . '/partials/footer.php'; ?>

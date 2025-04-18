@@ -36,7 +36,7 @@ h2 {
 }
 
 /* Description */
-p {
+.pDetail {
     font-size: 1em;
     color: #555;
     margin: 8px 0;
