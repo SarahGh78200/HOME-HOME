@@ -6,7 +6,7 @@ use App\Models\User;
 
 class RegisterController extends AbstractController
 {
-    private array $errors = []; // Déclaration correcte des erreurs
+    private array $errors = []; 
 
     public function index()
     {

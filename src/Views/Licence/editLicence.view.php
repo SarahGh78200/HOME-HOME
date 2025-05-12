@@ -36,12 +36,7 @@
                 <label class="form-check-label" for="availability">Licence disponible</label>
             </div>
 
-            <div class="form-group">
-                <label for="picture">Image :</label>
-                <input type="file" name="picture" id="picture" class="form-control-file">
-                <small class="form-text text-muted">Format d'image accepté : JPG, PNG, GIF</small>
-            </div>
-
+    
             <button type="submit" class="btn btn-primary btn-block">Enregistrer les modifications</button>
         </form>
     </div>

@@ -83,8 +83,17 @@
     border: none;
     border-radius: 5px;
     cursor: pointer;
-    width: 20%;
-    display: flex;
+        width: 17%;
+    display: block;
+margin: auto;
   justify-content: center;
-  align-items: center;
+margin-top: 30px;
+}
+
+@media (max-width: 768px) {
+    .faqButton{
+        width:90%;
+    }
+
+    
 }

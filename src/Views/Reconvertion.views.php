@@ -55,9 +55,6 @@ require_once(__DIR__ . '/partials/head.php');
 
   </main>
 
-  <footer>
-    © 2025 VotreNom - Tous droits réservés.
-  </footer>
 </main>
 <?php
  

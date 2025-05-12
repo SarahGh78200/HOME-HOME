@@ -2,29 +2,34 @@
     font-family: Arial, sans-serif;
     margin: 0;
     padding: 0;
-    background-color: rgba(0, 0, 0, 0.3);
-    max-width: 65%;
+    
     color: #ffffff;
-    display: flex;
+    
+        width: 50%;
+    display: block;
+    margin: auto;
     
 
 }
-
-/* .container {
-    width: 80%;
+.containerApropos{
+text-align: center;
+background-color: rgba(153, 23, 23, 0.3);
+    display: block;
     margin: auto;
-    background: rgb(131, 24, 24);
-    padding: 20px;
-    box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.1);
-    border-radius: 10px;
-    margin-top: 20px;
-    
-} */
+        margin-top: 65px;
+        border-radius: 10px;
+}
+.textApropos{
+margin: auto;
+}
+
+
 
 h1,
 h2,
 h3 {
     color: #004d99;
+    margin: auto;
 }
 
 ul {

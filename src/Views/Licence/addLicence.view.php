@@ -42,14 +42,7 @@ require_once(__DIR__ . '/../partials/head.php');
                 <?php } ?>
             </div>
 
-            <!-- Champ Image -->
-            <div class="mb-3">
-                <label for="picture" class="form-label">Image de la licence</label>
-                <input type="file" class="form-control" id="picture" name="picture" accept="image/*" required>
-                <?php if (isset($errors['picture'])) { ?>
-                    <p class="text-danger"><?= htmlspecialchars($errors['picture']) ?></p>
-                <?php } ?>
-            </div>
+        
 
             <!-- Champ Prix -->
             <div class="mb-3">

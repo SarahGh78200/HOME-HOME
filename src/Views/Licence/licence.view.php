@@ -19,9 +19,9 @@ require_once(__DIR__ . '/../partials/head.php');
                 <?php if ($licence->getAvailability()): // Vérifie si la licence est disponible 
                 ?>
                     <a href="/licenceDetail?id=<?= $licence->getId(); ?>" class="card">
-                        <img src="<?= htmlspecialchars($licence->getPicturePath()) ?>" alt="<?= htmlspecialchars($licence->getTitle()) ?>">
+        
                         <h2><?= htmlspecialchars($licence->getTitle()) ?></h2>
-                        <p><?= htmlspecialchars($licence->getDescription()) ?></p>
+                        <p>Description:<?= htmlspecialchars($licence->getDescription()) ?></p>
                         <p class="price">Prix: <?= htmlspecialchars($licence->getPrice()) ?> €</p>
 
                         <!-- Bouton Acheter -->

@@ -36,6 +36,8 @@ abstract class AbstractController
         $regexContent = '/^[a-zA-Zà-üÀ-Ü0-9 #?!@$%^,.;&*-]{4,}$/';
         $regexRole = '/^[12]$/';
         $regexAvailability = '/^(disponible|indisponible)$/i';
+        $regexPrice = '/^\d{1,8}([.,]\d{1,2})?$/';
+
 
         switch ($nameInput) {
             case 'pseudo':
@@ -76,6 +78,14 @@ abstract class AbstractController
             case 'availability':
                 if (!preg_match($regexAvailability, $value)) {
                     $this->arrayError['availability'] = 'La valeur doit être "disponible" ou "indisponible".';
+                }
+                break;
+            case 'price':
+                // Remplace la virgule par un point si elle est utilisée comme séparateur décimal
+                $value = str_replace(',', '.', $value);
+
+                if (!preg_match($regexPrice, $value) || floatval($value) < 2) {
+                    $this->arrayError['price'] = 'Le prix doit être un nombre valide (avec ou sans décimales), supérieur ou égal à 2.';
                 }
                 break;
         }

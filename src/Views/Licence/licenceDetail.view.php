@@ -9,10 +9,7 @@ require_once(__DIR__ . '/../partials/head.php');
     <h1>Détails de la Licence</h1>
 
     <div class="licence-detail">
-        <img src="<?= htmlspecialchars($myLicence->getPicturePath() ?? '') ?>"
-            alt="<?= htmlspecialchars($myLicence->getTitle() ?? '') ?>"
-            class="licence-detail-img">
-
+    
         <h2><?= htmlspecialchars($myLicence->getTitle() ?? '') ?></h2>
 
         <p class="pDetail"><strong>Description :</strong> <?= htmlspecialchars($myLicence->getDescription() ?? '') ?></p>

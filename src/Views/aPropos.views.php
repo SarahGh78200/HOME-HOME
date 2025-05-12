@@ -3,9 +3,10 @@
 require_once(__DIR__ . '/partials/head.php');
 ?>
 <main class="bodyAproposCss">
-    <div class="containerApropos" class="container">
+    <div class="containerApropos" >
+        <div class="textApropos">
         <h1>À propos de Free Moove</h1>
-        <p>Bienvenue sur <span class="highlight">Free Moove</span>, la plateforme conçue pour répondre aux besoins des chauffeurs de taxi et de ceux qui souhaitent intégrer ce métier.</p>
+        <p >Bienvenue sur <span class="highlight">Free Moove</span>, la plateforme conçue pour répondre aux besoins des chauffeurs de taxi et de ceux qui souhaitent intégrer ce métier.</p>
         
         <h2>Notre vision</h2>
         <p>Le métier de chauffeur de taxi est une profession essentielle avec des réglementations strictes. Nous avons créé <span class="highlight">Free Moove</span> pour simplifier et centraliser toutes ces démarches.</p>
@@ -42,6 +43,7 @@ require_once(__DIR__ . '/partials/head.php');
         <button></button>
         <a href="/register" class="cta">Rejoignez Free Moove maintenant !</a>
     </div>
+</div>
 </main>
 <?php
  
