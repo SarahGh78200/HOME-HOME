@@ -24,7 +24,6 @@ class Licence
         $this->description = $description;
         $this->availability = ($availability === 1) ? 1 : 0; // Assurer que la valeur est bien 0 ou 1
         $this->price = $price;
-      
         $this->type = $type;
         $this->commissioning_date = $commissioning_date;
         $this->city = $city;
@@ -34,8 +33,8 @@ class Licence
     public function addLicence(): bool
     {
         $pdo = DataBase::getConnection();
-        $sql = "INSERT INTO `licence` (`title`, `description`, `availability`, `price`,`type`,`commissioning_date`,`city` ,`id_user`) 
-                VALUES (?, ?, ?, ?, ?, ?)";
+        $sql = "INSERT INTO `licence` (`id`, `description`, `availability`, `price`,`type`,`commissioning_date`,`city` ,`id_user`) 
+                VALUES ( ?, ?, ?, ?, ?,?,?)";
 
         $statement = $pdo->prepare($sql);
         return $statement->execute([
