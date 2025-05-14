@@ -5,7 +5,7 @@ require_once(__DIR__ . '/partials/head.php');
 <main class="bodyAproposCss">
     <div class="containerApropos" >
         <div class="textApropos">
-        <h1>À propos de Free Moove</h1>
+        <h1 class="h1aPropos">À propos de Free Moove</h1>
         <p >Bienvenue sur <span class="highlight">Free Moove</span>, la plateforme conçue pour répondre aux besoins des chauffeurs de taxi et de ceux qui souhaitent intégrer ce métier.</p>
         
         <h2>Notre vision</h2>

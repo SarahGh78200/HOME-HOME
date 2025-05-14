@@ -1,21 +1,24 @@
 /* STYLE GÉNÉRAL */
+
 .bodyController {
     font-family: Arial, sans-serif;
     text-align: center;
-    background-color: #f8f9fa;
-    overflow-x: hidden;
-    min-height: 100vh;
-}
+    background-color: #7fb7f0;
+    /* /* overflow-x: hidden;
+    min-height: 100vh; */
+} */
 
-/* VIDÉO EN FOND */
+VIDÉO EN FOND
 .video-background {
-    position: absolute; /* PAS fixed ici */
+    position: absolute; 
     top: 0;
     left: 0;
     width: 100%;
     height: 100%;
     object-fit: cover;
     z-index: -1;
+    padding-top: 110px;
+   
 }
 
 /* CONTENU PRINCIPAL */
@@ -85,7 +88,7 @@
 /* SECTION : COMMENT ÇA MARCHE */
 .how-it-works {
     padding: 60px 20px;
-    background-color: rgba(255, 255, 255, 0.95);
+   
     border-radius: 15px;
     max-width: 1100px;
     margin: 50px auto;
@@ -118,59 +121,32 @@
 .step h3 {
     color: #007BFF;
 }
-
-/* SECTION : TÉMOIGNAGES */
-.testimonials {
-    padding: 60px 20px;
-    background-color: rgba(255, 255, 255, 0.95);
-    border-radius: 15px;
-    max-width: 1000px;
-    margin: 40px auto;
+/* CONTENEUR FLEX POUR LES BLOCS CONTENT */
+.hero-flex {
+    display: flex;
+    justify-content: center;
+    gap: 40px;
+    flex-wrap: wrap;
+  
     position: relative;
-    z-index: 2;
+    z-index: 1;
 }
 
-.testimonial-list blockquote {
-    background-color: #ffffff;
-    border-left: 5px solid #007BFF;
-    margin: 20px auto;
-    padding: 20px;
-    font-style: italic;
-    border-radius: 8px;
-    max-width: 700px;
-    box-shadow: 0 4px 8px rgba(0,0,0,0.05);
+.hero-flex .content {
+    flex: 1 1 45%;
+    max-width: 45%;
 }
 
-/* SECTION : FAQ */
-.faq {
-    padding: 50px 20px;
-    background-color: rgba(255, 255, 255, 0.95);
-    border-radius: 15px;
-    max-width: 900px;
-    margin: 40px auto;
-    position: relative;
-    z-index: 2;
+/* RESPONSIVE : repasser en colonne sur petits écrans */
+@media screen and (max-width: 768px) {
+    .hero-flex .content {
+        flex: 1 1 100%;
+       max-width: 81%;
+    
+    }
 }
 
-.faq details {
-    background: #f1f1f1;
-    margin: 10px 0;
-    padding: 15px 20px;
-    border-radius: 8px;
-    cursor: pointer;
-    transition: background 0.3s ease;
-}
 
-.faq details[open] {
-    background: #e9ecef;
-}
-
-.faq summary {
-    font-weight: bold;
-    color: #007BFF;
-    font-size: 1.1em;
-    margin-bottom: 8px;
-}
 
 /* RESPONSIVE DESIGN */
 @media screen and (max-width: 768px) {

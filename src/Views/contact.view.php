@@ -4,7 +4,7 @@ require_once(__DIR__ . '/partials/head.php');
 
 <main class="bodycontactCss">
     <div class="contact-container">
-        <h2>Nous Contacter</h2>
+        <h1>Nous Contacter</h1>
         <p><strong>Vous avez une question ou une demande ? Remplissez le formulaire ci-dessous, nous vous répondrons rapidement.</strong></p>
 
         <?php if (!empty($name)) echo "<p style='color:green;'>$name</p>"; ?>

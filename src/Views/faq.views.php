@@ -4,7 +4,7 @@ require_once(__DIR__ . '/partials/head.php');
 ?>
 
 <main class="bodyfaqCss">
-
+<h1>Foire aux question</h1>
     <div class="faq-container">
         <h2><strong>Foire Aux Questions (FAQ)</strong></h2>
 

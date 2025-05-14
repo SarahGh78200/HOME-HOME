@@ -42,8 +42,6 @@ require_once(__DIR__ . '/../partials/head.php');
                 <?php } ?>
             </div>
 
-        
-
             <!-- Champ Prix -->
             <div class="mb-3">
                 <label for="price" class="form-label">Prix</label>
@@ -52,6 +50,31 @@ require_once(__DIR__ . '/../partials/head.php');
                     <p class="text-danger"><?= htmlspecialchars($errors['price']) ?></p>
                 <?php } ?>
             </div>
+              <!-- Champ type -->
+            <div class="mb-3">
+                <label for="type" class="form-label">Type</label>
+                <input type="number" class="form-control" id="type" name="type" value="<?= htmlspecialchars($type) ?>" required min="2" step="1">
+                <?php if (isset($errors['type'])) { ?>
+                    <p class="text-danger"><?= htmlspecialchars($errors['type']) ?></p>
+                <?php } ?>
+            </div>
+              <!-- Champ commissioning_date -->
+            <div class="mb-3">
+                <label for="commissioning_date" class="form-label">Date de mise en service</label>
+                <input type="number" class="form-control" id="commissioning_date" name="commissioning_date" value="<?= htmlspecialchars($commissioning_date) ?>" required min="2" step="1">
+                <?php if (isset($errors['commissioning_date'])) { ?>
+                    <p class="text-danger"><?= htmlspecialchars($errors['commissioning_date']) ?></p>
+                <?php } ?>
+            </div>
+              <!-- Champ City -->
+            <div class="mb-3">
+                <label for="city" class="form-label">Ville</label>
+                <input type="number" class="form-control" id="city" name="city" value="<?= htmlspecialchars($city) ?>" required min="2" step="1">
+                <?php if (isset($errors['city'])) { ?>
+                    <p class="text-danger"><?= htmlspecialchars($errors['city']) ?></p>
+                <?php } ?>
+            </div>
+      
 
             <div class="btnSubmit">
                 <button class= "buttonAddLicence"  type="submit" class="btn btn-primary mt-5 mb-5 text-center">Ajouter la licence</button>

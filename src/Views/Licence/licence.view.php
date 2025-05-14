@@ -6,7 +6,7 @@ require_once(__DIR__ . '/../partials/head.php');
     <div class="buttonLicence1">
     <?php if (!empty($_SESSION['user'])) { ?>
         <?php if ($_SESSION['user']['idRole'] == 1 || $_SESSION['user']['idRole'] == 2) { ?>
-            <button type="submit"><a href="/addLicence"  class="aLicence"> Ajouter une licence</a></button>
+            <button type="submit" class="submit11"><a href="/addLicence"  class="aLicence"> Ajouter une licence</a></button>
         <?php } ?>
     <?php } else { ?>
         <p class="LicenceAnnonce">Vous devez être connecté pour ajouter une licence.</p>

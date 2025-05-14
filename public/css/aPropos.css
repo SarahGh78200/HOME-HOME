@@ -5,7 +5,7 @@
     
     color: #ffffff;
     
-        width: 50%;
+        width: 60%;
     display: block;
     margin: auto;
     
@@ -19,16 +19,16 @@ background-color: rgba(153, 23, 23, 0.3);
         margin-top: 65px;
         border-radius: 10px;
 }
-.textApropos{
-margin: auto;
-}
+    .textApropos{
+    margin: auto;
+    }
 
 
 
-h1,
+.h1aPropos,
 h2,
 h3 {
-    color: #004d99;
+    color: #ffffff;
     margin: auto;
 }
 
@@ -43,7 +43,7 @@ ul li {
 
 .highlight {
     font-weight: bold;
-    color: #ff6600;
+    color: #e01313;
 }
 
 .cta {
@@ -61,4 +61,13 @@ ul li {
 
 .cta:hover {
     background: #003366;
+}
+
+@media (max-width: 768px) {
+    .cta{
+               width: 100%;
+    }
+    .bodyAproposCss {
+        width: 90%;
+    }
 }

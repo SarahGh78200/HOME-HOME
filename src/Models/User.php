@@ -42,51 +42,51 @@ class User
         ]);
     }
     public static function findAll(): array
-{
-    $pdo = DataBase::getConnection(); // Connexion à la base de données
-    $sql = "SELECT * FROM user"; // Requête pour récupérer tous les utilisateurs
-    $statement = $pdo->prepare($sql);
-    $statement->execute();
-    $rows = $statement->fetchAll(PDO::FETCH_ASSOC); // Récupère tous les résultats
+    {
+        $pdo = DataBase::getConnection(); // Connexion à la base de données
+        $sql = "SELECT * FROM user"; // Requête pour récupérer tous les utilisateurs
+        $statement = $pdo->prepare($sql);
+        $statement->execute();
+        $rows = $statement->fetchAll(PDO::FETCH_ASSOC); // Récupère tous les résultats
 
-    // Créer un tableau d'objets User à partir des résultats
-    $users = [];
-    foreach ($rows as $row) {
-        $users[] = new User(
-            $row['id'],  
-            $row['surname'], 
-            $row['name'],
-            $row['birth_date'], 
-            $row['password'], 
-            $row['id_role'], 
-            $row['email']
-        );
+        // Créer un tableau d'objets User à partir des résultats
+        $users = [];
+        foreach ($rows as $row) {
+            $users[] = new User(
+                $row['id'],
+                $row['surname'],
+                $row['name'],
+                $row['birth_date'],
+                $row['password'],
+                $row['id_role'],
+                $row['email']
+            );
+        }
+        return $users; // Retourne le tableau des utilisateurs
     }
-    return $users; // Retourne le tableau des utilisateurs
-}
-public static function getClients(): array
-{
-    $pdo = DataBase::getConnection(); // Connexion à la base de données
-    $sql = "SELECT * FROM licence WHERE id_role = 2"; // Remplace `2` par l'ID réel du rôle 'client'
-    $statement = $pdo->prepare($sql);
-    $statement->execute();
-    $rows = $statement->fetchAll(PDO::FETCH_ASSOC);
+    public static function getClients(): array
+    {
+        $pdo = DataBase::getConnection(); // Connexion à la base de données
+        $sql = "SELECT * FROM licence WHERE id_role = 2"; // Remplace `2` par l'ID réel du rôle 'client'
+        $statement = $pdo->prepare($sql);
+        $statement->execute();
+        $rows = $statement->fetchAll(PDO::FETCH_ASSOC);
 
-    // Convertir les résultats en objets User
-    $clients = [];
-    foreach ($rows as $row) {
-        $clients[] = new User(
-            $row['id'],
-            $row['surname'],
-            $row['name'],
-            $row['birth_date'],
-            $row['password'],
-            $row['id_role'],
-            $row['email']
-        );
+        // Convertir les résultats en objets User
+        $clients = [];
+        foreach ($rows as $row) {
+            $clients[] = new User(
+                $row['id'],
+                $row['surname'],
+                $row['name'],
+                $row['birth_date'],
+                $row['password'],
+                $row['id_role'],
+                $row['email']
+            );
+        }
+        return $clients;
     }
-    return $clients;
-}
 
 
     public static function findByEmail(string $email): ?User
@@ -99,34 +99,33 @@ public static function getClients(): array
 
         if ($row) {
             return new User(
-                $row['id'],  
-                $row['surname'], 
+                $row['id'],
+                $row['surname'],
                 $row['name'],
-                $row['birth_date'], 
-                $row['password'], 
-                $row['id_role'], 
+                $row['birth_date'],
+                $row['password'],
+                $row['id_role'],
                 $row['email']
             );
         }
         return null;
-        
     }
- 
- 
+
+
 
     public function getLicences(): array
     {
         // Connexion à la base de données
         $pdo = DataBase::getConnection();
-    
+
         // SQL pour récupérer toutes les licences de l'utilisateur basé sur son ID
         $sql = "SELECT * FROM licence WHERE id_user = ?"; // Utilisez id_user ici
         $statement = $pdo->prepare($sql);
         $statement->execute([$this->id]); // Utiliser l'ID de l'utilisateur courant pour récupérer ses licences
-    
+
         // Récupérer toutes les lignes correspondantes
         $rows = $statement->fetchAll(PDO::FETCH_ASSOC);
-    
+
         // Créer un tableau d'objets Licence à partir des résultats
         $licences = [];
         foreach ($rows as $row) {
@@ -135,168 +134,214 @@ public static function getClients(): array
                 $row['title'],
                 $row['description'],
                 (int) $row['availability'], // Convertir en entier
-                $row['picture'],
                 $row['price'],
-                $row['id_user'] // Assurez-vous d'utiliser id_user pour la correspondance
+                  $row['id_user'],
+                $row['type'],
+                $row['commissioning_date'],
+                $row['city'],
             );
         }
-    
+
         return $licences;
     }
-    
-public function licenceClient()
-{
-    $pdo = DataBase::getConnection();
-    $pdo->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
 
-    $sql = "SELECT `id`, `title`, `description`, `availability`, `picture`, `price`, `id_user` FROM `licence` WHERE `id` = ?";
-    $statement = $pdo->prepare($sql);
-    $statement->execute([$this->id]);
-    $row = $statement->fetch(PDO::FETCH_ASSOC);
+    public function licenceClient()
+    {
+        $pdo = DataBase::getConnection();
+        $pdo->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
 
-    if ($row) {
-        return new Licence(
-            $row['id'],
-            $row['title'],
-            $row['description'],
-            (int) $row['availability'], // Convertir en entier
-            $row['picture'],
-            $row['price'],
-            $row['id_user']
-        );
-    }
-    return null;
-}
+        $sql = "SELECT `id`, `title`, `description`, `availability`, `picture`, `price`, `id_user` FROM `licence` WHERE `id` = ?";
+        $statement = $pdo->prepare($sql);
+        $statement->execute([$this->id]);
+        $row = $statement->fetch(PDO::FETCH_ASSOC);
 
-public static function getLicencesByUserId(int $userId): array
-{
-    $pdo = DataBase::getConnection();
-    $sql = "SELECT * FROM licence WHERE id_user = ?";
-    $statement = $pdo->prepare($sql);
-    $statement->execute([$userId]);
-    $rows = $statement->fetchAll(PDO::FETCH_ASSOC);
-
-    $licences = [];
-    foreach ($rows as $row) {
-        $licences[] = new Licence(
-            $row['id'],
-            $row['title'],
-            $row['description'],
-            (int) $row['availability'],
-            $row['picture'],
-            $row['price'],
-            $row['id_user']
-        );
-    }
-    return $licences;
-    
-}
-
-public function getUserById($id)
-{
-    $pdo = DataBase::getConnection();
-    $sql = "SELECT `name`, `email` FROM `user` WHERE `id` = ?"; // Correction ici
-    $statement = $pdo->prepare($sql);
-    $statement->execute([$id]);
-    return $statement->fetch(PDO::FETCH_ASSOC);
-}
-public function updateUser($id, $surname, $name, $birthDate, $email, $password, $idRole): bool {
-    $db = DataBase::getConnection();
-    $sql = "UPDATE user SET surname = ?, name = ?, birth_date = ?, email = ?, password = ?, id_role = ? WHERE id = ?";
-    $stmt = $db->prepare($sql);
-
-    return $stmt->execute([$surname, $name, $birthDate, $email, $password, $idRole, $id]);
-}
-
-
-
-public static function getContactDetailsByLicenceId(int $licenceId): ?array
-{
-    $pdo = DataBase::getConnection();
-    $sql = "SELECT u.surname, u.name, u.email 
-            FROM user u
-            JOIN licence l ON u.id = l.id_user
-            WHERE l.id = ?";
-    $statement = $pdo->prepare($sql);
-    $statement->execute([$licenceId]);
-    $row = $statement->fetch(PDO::FETCH_ASSOC);
-
-    return $row ?: null; // Retourne un tableau avec les infos ou null si aucun résultat
-}
-public static function findById(int $id): ?self
-{
-    $pdo = DataBase::getConnection(); // Correction: DataBase au lieu de Database
-    $stmt = $pdo->prepare("SELECT * FROM user WHERE id = :id"); // Correction: user au lieu de users
-    $stmt->execute(['id' => $id]);
-    $userData = $stmt->fetch(PDO::FETCH_ASSOC);
-
-    if (!$userData) {
+        if ($row) {
+            return new Licence(
+                $row['id'],
+                $row['title'],
+                $row['description'],
+                (int) $row['availability'], // Convertir en entier
+                $row['price'],
+                $row['id_user'],
+                 $row['type'],
+                $row['commissioning_date'],
+                $row['city'],
+            );
+        }
         return null;
     }
 
-    // Correction: Création de l'objet User selon votre constructeur
-    return new User(
-        $userData['id'],
-        $userData['surname'],
-        $userData['name'],
-        $userData['birth_date'],
-        $userData['password'],
-        $userData['id_role'],
-        $userData['email']
-    );
+    public static function getLicencesByUserId(int $userId): array
+    {
+        $pdo = DataBase::getConnection();
+        $sql = "SELECT * FROM licence WHERE id_user = ?";
+        $statement = $pdo->prepare($sql);
+        $statement->execute([$userId]);
+        $rows = $statement->fetchAll(PDO::FETCH_ASSOC);
 
-    
-}
-public function deleteUser(): bool
-{
-    $pdo = DataBase::getConnection();
-    $pdo->beginTransaction();
-
-    try {
-        // Supprimer les licences de l'utilisateur
-        $sql1 = "DELETE FROM licence WHERE id_user = ?";
-        $stmt1 = $pdo->prepare($sql1);
-        $stmt1->execute([$this->id]);
-
-        // Supprimer l'utilisateur
-        $sql2 = "DELETE FROM user WHERE id = ?";
-        $stmt2 = $pdo->prepare($sql2);
-        $stmt2->execute([$this->id]);
-
-        $pdo->commit();
-        return true;
-    } catch (\Exception $e) {
-        $pdo->rollBack();
-        throw $e;
+        $licences = [];
+        foreach ($rows as $row) {
+            $licences[] = new Licence(
+                $row['id'],
+                $row['title'],
+                $row['description'],
+                (int) $row['availability'],
+                $row['price'],
+                $row['id_user'],
+                 $row['type'],
+                $row['commissioning_date'],
+                $row['city'],
+            );
+        }
+        return $licences;
     }
-}
+
+    public function getUserById($id)
+    {
+        $pdo = DataBase::getConnection();
+        $sql = "SELECT `name`, `email` FROM `user` WHERE `id` = ?"; // Correction ici
+        $statement = $pdo->prepare($sql);
+        $statement->execute([$id]);
+        return $statement->fetch(PDO::FETCH_ASSOC);
+    }
+    public function updateUser($id, $surname, $name, $birthDate, $email, $password, $idRole): bool
+    {
+        $db = DataBase::getConnection();
+        $sql = "UPDATE user SET surname = ?, name = ?, birth_date = ?, email = ?, password = ?, id_role = ? WHERE id = ?";
+        $stmt = $db->prepare($sql);
+
+        return $stmt->execute([$surname, $name, $birthDate, $email, $password, $idRole, $id]);
+    }
 
 
 
-public static function getAll()
-{
-    $pdo = DataBase::getConnection(); // ✅ cohérent avec le reste
+    public static function getContactDetailsByLicenceId(int $licenceId): ?array
+    {
+        $pdo = DataBase::getConnection();
+        $sql = "SELECT u.surname, u.name, u.email 
+            FROM user u
+            JOIN licence l ON u.id = l.id_user
+            WHERE l.id = ?";
+        $statement = $pdo->prepare($sql);
+        $statement->execute([$licenceId]);
+        $row = $statement->fetch(PDO::FETCH_ASSOC);
 
-    $stmt = $pdo->query("SELECT * FROM user");
-    return $stmt->fetchAll(\PDO::FETCH_CLASS, self::class);
-}
+        return $row ?: null; // Retourne un tableau avec les infos ou null si aucun résultat
+    }
+    public static function findById(int $id): ?self
+    {
+        $pdo = DataBase::getConnection(); // Correction: DataBase au lieu de Database
+        $stmt = $pdo->prepare("SELECT * FROM user WHERE id = :id"); // Correction: user au lieu de users
+        $stmt->execute(['id' => $id]);
+        $userData = $stmt->fetch(PDO::FETCH_ASSOC);
+
+        if (!$userData) {
+            return null;
+        }
+
+        // Correction: Création de l'objet User selon votre constructeur
+        return new User(
+            $userData['id'],
+            $userData['surname'],
+            $userData['name'],
+            $userData['birth_date'],
+            $userData['password'],
+            $userData['id_role'],
+            $userData['email']
+        );
+    }
+    public function deleteUser(): bool
+    {
+        $pdo = DataBase::getConnection();
+        $pdo->beginTransaction();
+
+        try {
+            // Supprimer les licences de l'utilisateur
+            $sql1 = "DELETE FROM licence WHERE id_user = ?";
+            $stmt1 = $pdo->prepare($sql1);
+            $stmt1->execute([$this->id]);
+
+            // Supprimer l'utilisateur
+            $sql2 = "DELETE FROM user WHERE id = ?";
+            $stmt2 = $pdo->prepare($sql2);
+            $stmt2->execute([$this->id]);
+
+            $pdo->commit();
+            return true;
+        } catch (\Exception $e) {
+            $pdo->rollBack();
+            throw $e;
+        }
+    }
+
+
+
+    public static function getAll()
+    {
+        $pdo = DataBase::getConnection(); // ✅ cohérent avec le reste
+
+        $stmt = $pdo->query("SELECT * FROM user");
+        return $stmt->fetchAll(\PDO::FETCH_CLASS, self::class);
+    }
 
 
 
     // Getters et Setters
-    public function getId(): ?int { return $this->id; }
-    public function setId(?int $id): void { $this->id = $id; }
-    public function getName(): ?string { return $this->name; }
-    public function setName(?string $name): void { $this->name = $name; }
-    
-    public function getSurname(): ?string { return $this->surname; }
-    public function setSurname(?string $surname): void { $this->surname = $surname; }
-    public function getPassword(): ?string { return $this->password; }
-    public function setPassword(?string $password): void { $this->password = $password; }
-    public function getBirthDate(): ?string { return $this->birth_date; }
-    public function setBirthDate(?string $birth_date): void { $this->birth_date = $birth_date; }
-    public function getId_Role(): int|string|null { return $this->id_role; }
-    public function setId_Role(int|string|null $id_role): void { $this->id_role = $id_role; }
-    public function getEmail(): ?string { return $this->email; }
-    public function setEmail(?string $email): void { $this->email = $email; }
-} 
+    public function getId(): ?int
+    {
+        return $this->id;
+    }
+    public function setId(?int $id): void
+    {
+        $this->id = $id;
+    }
+    public function getName(): ?string
+    {
+        return $this->name;
+    }
+    public function setName(?string $name): void
+    {
+        $this->name = $name;
+    }
+
+    public function getSurname(): ?string
+    {
+        return $this->surname;
+    }
+    public function setSurname(?string $surname): void
+    {
+        $this->surname = $surname;
+    }
+    public function getPassword(): ?string
+    {
+        return $this->password;
+    }
+    public function setPassword(?string $password): void
+    {
+        $this->password = $password;
+    }
+    public function getBirthDate(): ?string
+    {
+        return $this->birth_date;
+    }
+    public function setBirthDate(?string $birth_date): void
+    {
+        $this->birth_date = $birth_date;
+    }
+    public function getId_Role(): int|string|null
+    {
+        return $this->id_role;
+    }
+    public function setId_Role(int|string|null $id_role): void
+    {
+        $this->id_role = $id_role;
+    }
+    public function getEmail(): ?string
+    {
+        return $this->email;
+    }
+    public function setEmail(?string $email): void
+    {
+        $this->email = $email;
+    }
+}

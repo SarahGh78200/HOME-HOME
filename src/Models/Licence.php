@@ -3,45 +3,52 @@
 namespace App\Models;
 
 use Config\DataBase;
+use DateTime;
 use PDO;
 
 class Licence
 {
     protected ?int $id;
-    protected ?string $title;
     protected ?string $description;
     protected ?int $availability; // Stocké sous forme d'entier (0 ou 1)
-    protected ?string $picture;
     protected ?float $price;
+    protected ?string  $type;
+    protected ?string $commissioning_date;
+    protected ?string $city;
     protected ?int $id_user;
 
-    public function __construct(?int $id, ?string $title, ?string $description, ?int $availability, ?string $picture, ?float $price, ?int $id_user)
+    public function __construct(?int $id, ?string $description, ?int $availability, ?float $price, ?string $type, ?string $commissioning_date, ?string $city, ?int $id_user)
     {
         $this->id = $id;
-        $this->title = $title;
+
         $this->description = $description;
         $this->availability = ($availability === 1) ? 1 : 0; // Assurer que la valeur est bien 0 ou 1
-        $this->picture = $picture;
         $this->price = $price;
-        $this->id_user = $id_user;
+      
+        $this->type = $type;
+        $this->commissioning_date = $commissioning_date;
+        $this->city = $city;
+          $this->id_user = $id_user;
     }
 
-    public function addLicence(): bool 
+    public function addLicence(): bool
     {
         $pdo = DataBase::getConnection();
-        $sql = "INSERT INTO `licence` (`title`, `description`, `availability`, `picture`, `price`, `id_user`) 
-                VALUES (?, ?, 1, ?, ?, ?)"; // `availability` est toujours 1
-    
+        $sql = "INSERT INTO `licence` (`title`, `description`, `availability`, `price`,`type`,`commissioning_date`,`city` ,`id_user`) 
+                VALUES (?, ?, ?, ?, ?, ?)";
+
         $statement = $pdo->prepare($sql);
         return $statement->execute([
-            $this->title, 
-            $this->description, 
-            $this->picture, 
-            $this->price, 
-            $this->id_user
+            $this->description,
+            $this->availability,
+            $this->price,
+            $this->type,
+            $this->commissioning_date,
+            $this->city,
+            $this->id_user,
         ]);
     }
-    
+
     public function getLicenceById(): ?Licence
     {
         $pdo = DataBase::getConnection();
@@ -49,21 +56,53 @@ class Licence
         $stmt = $pdo->prepare($sql);
         $stmt->execute([$this->id]);
         $data = $stmt->fetch(PDO::FETCH_ASSOC);
-        
+
         return $data ? new Licence(
-            $data['id'], $data['title'], $data['description'], 
-            $data['availability'], $data['picture'], $data['price'], $data['id_user']
+            $data['id'],
+            $data['description'],
+            $data['availability'],
+            $data['price'],
+            $data['type'],
+            $data['commissioning_date'],
+            $data['city'],
+            $data['id_user']
         ) : null;
+    }
+    public function readLicence()
+    {
+        $pdo = DataBase::getConnection();
+        $sql = "SELECT * FROM `licence`WHERE id = ?";
+     $statement = $pdo->prepare($sql);
+    $statement->execute(this->);
+
+    return $statement->fetchAll(PDO::FETCH_ASSOC); 
+    }
+ public function getProductById()
+    {
+        $pdo = DataBase::getConnection();
+        // Sélectionne les données d’un produit en fonction de son identifiant $this->id.
+        $sql = "SELECT * FROM `products` WHERE id = ?";
+        // Prépare la requête SQL
+        $statement = $pdo->prepare($sql);
+        // Exécute la requête
+        $statement->execute([$this->id]);
+        // Si un produit est trouvé, crée et retourne un nouvel objet Product avec les données récupérées.Sinon, retourne null.
+        $row = $statement->fetch(PDO::FETCH_ASSOC);
+        if ($row) {
+            return new Product($row['id'], $row['category'], $row['name'], $row['description'], $row['price'], $row['created_at'], $row['updated_at'], $row['image'], null, null, null, null, null, null, null, null, null);
+        } else {
+            return null;
+        }
     }
 
     public function updateLicence()
     {
         $db = Database::getConnection();
-        $query = $db->prepare("UPDATE licence SET title = ?, description = ?, availability = ?, picture = ?, price = ? WHERE id = ?");
-        return $query->execute([$this->title, $this->description, $this->availability, $this->picture, $this->price, $this->id]);
+        $query = $db->prepare("UPDATE licence SET title = ?, description = ?, availability = ?, price = ? WHERE id = ?");
+        return $query->execute([ $this->description, $this->availability, $this->price, $this->id, $this->type, $this->commissioning_date, $this->city,]);
     }
-    
-    
+
+
     public function deleteLicence(): bool
     {
         $pdo = DataBase::getConnection();
@@ -72,56 +111,51 @@ class Licence
         return $statement->execute([$this->id]);
     }
 
-    public static function readLicence(): array
+    public static function getAllLicence(): array
     {
         $pdo = DataBase::getConnection();
         $sql = "SELECT * FROM `licence`";
         $statement = $pdo->prepare($sql);
         $statement->execute();
         $licencesData = $statement->fetchAll(PDO::FETCH_ASSOC);
-    
+
         $licences = [];
         foreach ($licencesData as $data) {
             $licences[] = new Licence(
                 $data['id'],
-                $data['title'],
                 $data['description'],
                 (int) $data['availability'], // Convertir en entier
-                $data['picture'],
                 $data['price'],
-                $data['id_user']
+                $data['type'],
+                $data['commissioning_date'],
+                $data['city'],
+                $data['id_user'],
             );
         }
         return $licences;
     }
 
-    public function getPicturePath(): string
-    {
-        $picturePath = __DIR__ . '/../../public/imgUpload/' . $this->picture;
-        if (file_exists($picturePath)) {
-            return '/public/imgUpload/' . $this->picture;
-        }
-        return '/public/imgUpload/default.jpg'; // Image par défaut si le fichier n'existe pas
-    }
+
     public static function findById(int $id): ?self
     {
         $pdo = DataBase::getConnection(); // Utilisez getConnection() au lieu de getPDO()
         $stmt = $pdo->prepare("SELECT * FROM licence WHERE id = ?"); // Table "licence" au singulier
         $stmt->execute([$id]); // Paramètre positionnel plus simple
         $licenceData = $stmt->fetch(PDO::FETCH_ASSOC);
-    
+
         if (!$licenceData) {
             return null;
         }
-    
+
         return new Licence(
             $licenceData['id'],
-            $licenceData['title'],
             $licenceData['description'],
             $licenceData['availability'],
-            $licenceData['picture'],
             $licenceData['price'],
-            $licenceData['id_user']
+            $licenceData['type'],
+            $licenceData['commissioning_date'],
+            $licenceData['city'],
+            $licenceData['id_user'],
         );
     }
     public static function findAll(): array
@@ -129,24 +163,26 @@ class Licence
         $pdo = DataBase::getConnection(); // Récupération de la connexion PDO
         $stmt = $pdo->query("SELECT * FROM licence"); // Exécution de la requête pour récupérer toutes les licences
         $licencesData = $stmt->fetchAll(PDO::FETCH_ASSOC); // Récupération des données sous forme de tableau associatif
-    
+
         $licences = [];
         foreach ($licencesData as $data) {
             $licences[] = new Licence(
                 $data['id'],
-                $data['title'],
                 $data['description'],
                 $data['availability'],
-                $data['picture'],
                 $data['price'],
-                $data['id_user']
+               
+                $data['type'],
+                $data['commissioning_date'],
+                $data['city'],
+                 $data['id_user'],
+
+
             );
         }
-    
+
         return $licences; // Retourne un tableau d'objets Licence
     }
-    
-
 
 
     // Getters et Setters
@@ -161,16 +197,7 @@ class Licence
         return $this;
     }
 
-    public function getTitle(): ?string
-    {
-        return $this->title;
-    }
 
-    public function setTitle(?string $title): static
-    {
-        $this->title = $title;
-        return $this;
-    }
 
     public function getDescription(): ?string
     {
@@ -205,17 +232,6 @@ class Licence
         return $this;
     }
 
-    public function getPicture(): ?string
-    {
-        return $this->picture;
-    }
-
-    public function setPicture(?string $picture): static
-    {
-        $this->picture = $picture;
-        return $this;
-    }
-
     public function getIdUser(): ?int
     {
         return $this->id_user;
@@ -226,5 +242,34 @@ class Licence
         $this->id_user = $id_user;
         return $this;
     }
-    
+    public function getType(): ?string
+    {
+        return $this->type;
+    }
+
+    public function setType(?string $type): static
+    {
+        $this->type = $type;
+        return $this;
+    }
+    public function getCommissioning_date(): ?string
+    {
+        return $this->commissioning_date;
+    }
+
+    public function setCommissioning_date(?string $commissioning_date): static
+    {
+        $this->commissioning_date = $commissioning_date;
+        return $this;
+    }
+    public function getCity(): ?int
+    {
+        return $this->city;
+    }
+
+    public function setCity(?string $city): static
+    {
+        $this->city = $city;
+        return $this;
+    }
 }

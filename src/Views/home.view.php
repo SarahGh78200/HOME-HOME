@@ -1,79 +1,52 @@
-<?php
-require_once(__DIR__ . '/partials/head.php');
-?>
+<?php require_once(__DIR__ . '/partials/head.php'); ?>
 
 <main class="bodyController">
 
-    
-<!-- 🔥 SECTION HERO AVEC VIDÉO EN BACKGROUND -->
-<section class="hero">
-    <video class="video-background" autoplay muted loop>
-        <source src="/public/video/taxi-presentation.mp4" type="video/mp4">
-        Votre navigateur ne supporte pas la vidéo HTML5.
-    </video>
 
-    <div class="content">
-        <h1 class="titlehome">Bonjour et bienvenue sur <span>Free Moove Driver</span> !</h1>
-        <p>Votre plateforme de reconversion professionnelle dans le métier de taxi.</p>
-        <p>Rejoignez notre réseau de conducteurs et louez ou achetez une licence pour démarrer votre nouvelle carrière.</p>
-        <p>Simple, rapide et sécurisé. Devenez conducteur dès aujourd'hui !</p>
-        <a href="/src/Views/Reconvertion.views.php" class="cta-button">Commencez votre reconversion</a>
+
+    <!-- Conteneur Flex -->
+    <div class="hero-flex">
+        <!-- Bloc 1 : Reconvertir -->
+        <div class="content">
+            <h1 class="titlehome">Reconversion professionnelle</h1>
+            <p>Envie de changer de métier ? Découvrez comment devenir chauffeur de taxi grâce à notre accompagnement.</p>
+            <p>Nous vous guidons pas à pas pour réussir votre reconversion : démarches, formations, financement, etc.</p>
+            <p>Rejoignez une profession utile, humaine et dynamique !</p>
+            <a href="/src/Views/reconvertion.views.php" class="cta-button">En savoir plus sur la reconversion</a>
+        </div>
+
+        <!-- Bloc 2 : Licences -->
+        <div class="content">
+            <h1 class="titlehome">Location ou vente de licences</h1>
+            <p>Vous cherchez une licence de taxi pour démarrer votre activité ?</p>
+            <p>Accédez à notre catalogue de licences disponibles à la location ou à la vente partout en France.</p>
+            <p>Publiez ou trouvez une licence en quelques clics, en toute sécurité.</p>
+            <a href="/src/Views/Licence/licence.view.php" class="cta-button">Voir les licences disponibles</a>
+        </div>
     </div>
 </section>
 
-    <!-- 🧭 COMMENT ÇA MARCHE -->
-    <section class="how-it-works">
-        <h2 class="titlehomeh2">🚀 Comment ça marche ?</h2>
-        <div class="steps">
-            <div class="step">
-                <h3>1️⃣ Inscrivez-vous</h3>
-                <p>Remplissez votre profil en quelques clics pour accéder à nos services personnalisés.</p>
-            </div>
-            <div class="step">
-                <h3>2️⃣ Trouvez votre licence</h3>
-                <p>Explorez notre catalogue de licences disponibles à la location ou à l’achat, dans votre région.</p>
-            </div>
-            <div class="step">
-                <h3>3️⃣ Lancez votre activité</h3>
-                <p>Nous vous guidons jusqu’au démarrage de votre nouvelle vie de conducteur. Simple et rapide.</p>
-            </div>
+<!-- 🧭 COMMENT ÇA MARCHE -->
+<section class="how-it-works">
+    <h2 class="titlehomeh2"> Comment ça marche ?</h2>
+    <div class="steps">
+        <div class="step">
+            <h3>1️⃣ Inscrivez-vous</h3>
+            <p>Remplissez votre profil en quelques clics pour accéder à nos services personnalisés.</p>
         </div>
-        <div class="action-center">
-            <a href="/src/Views/Reconvertion.views.php" class="cta-button">Je commence maintenant</a>
+        <div class="step">
+            <h3>2️⃣ Trouvez votre licence</h3>
+            <p>Explorez notre catalogue de licences disponibles à la location ou à l’achat, dans votre région.</p>
         </div>
-    </section>
-
-    <!-- 💬 TÉMOIGNAGES -->
-    <section class="testimonials">
-        <h2 class="titlehomeh2">💬 Ils ont réussi avec Free Moove</h2>
-        <div class="testimonial-list">
-            <blockquote>
-                <p>"Grâce à Free Moove, j’ai obtenu ma licence et commencé à travailler en moins d’un mois. Accompagnement au top."</p>
-                <cite>– Karim B.</cite>
-            </blockquote>
-            <blockquote>
-                <p>"La location de licence m’a permis de me lancer sans gros investissement. Une vraie opportunité de reconversion."</p>
-                <cite>– Samira L.</cite>
-            </blockquote>
+        <div class="step">
+            <h3>3️⃣ Lancez votre activité</h3>
+            <p>Nous vous guidons jusqu’au démarrage de votre nouvelle vie de conducteur. Simple et rapide.</p>
         </div>
-    </section>
-
-    <!-- ❓ FAQ -->
-    <section class="faq">
-        <h2 class="titlehomeh2">❓ Foire aux questions</h2>
-        <details>
-            <summary>Ai-je besoin d’un permis spécial pour devenir taxi ?</summary>
-            <p>Oui, le permis B est obligatoire, ainsi qu’une formation (CCPCT) et une carte professionnelle délivrée par la préfecture.</p>
-        </details>
-        <details>
-            <summary>Comment fonctionne la location d’une licence ?</summary>
-            <p>Nous mettons en relation les conducteurs avec des détenteurs de licences disponibles à la location sur toute la France.</p>
-        </details>
-        <details>
-            <summary>Est-ce que Free Moove m’aide dans les démarches ?</summary>
-            <p>Oui ! De l’inscription jusqu’au démarrage, on vous accompagne dans toutes les étapes administratives, techniques et légales.</p>
-        </details>
-    </section>
+    </div>
+    <div class="action-center">
+        <a href="/src/Views/Reconvertion.views.php" class="cta-button">Je commence maintenant</a>
+    </div>
+</section>
 
 </main>
 

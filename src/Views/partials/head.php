@@ -1,4 +1,3 @@
-
 <!DOCTYPE html>
 <html lang="fr">
 
@@ -24,8 +23,10 @@
         <div class="custom-menu" onclick="toggleMenu()">&#9776;</div>
         <ul class="ulNav" id="nav-links">
             <li><a href="/"><strong>Accueil</strong></a></li>
-            <li><a href="/licence"><strong>Licence</strong></a></li>
             <li><a href="/src/Views/aPropos.views.php"><strong>À propos</strong></a></li>
+
+            <li><a href="/licence"><strong>Licence</strong></a></li>
+            <li><a href="/src/Views/reconvertion.views.php"><strong>Formation</strong></a></li>
             <li><a href="/src/Views/faq.views.php"><strong>Foire aux questions ?</strong></a></li>
             <li><a href="/src/Views/contact.view.php"><strong>Nous contacter</strong></a></li>
         </ul>
@@ -38,20 +39,22 @@
                 <?php } ?>
             </a>
             <ul class="dropdown-menu" aria-labelledby="profileDropdown">
-    <?php if (!empty($_SESSION['user'])) { ?>
-        <!-- Afficher le Dashboard UNIQUEMENT si l'utilisateur a idRole == 1 -->
-        <?php if ($_SESSION['user']['idRole'] == 1) { ?>
-            <li><a class="dropdown-item" href="/admin/dashboard
+                <?php if (!empty($_SESSION['user'])) { ?>
+                    <!-- Afficher le Dashboard UNIQUEMENT si l'utilisateur a idRole == 1 -->
+                    <?php if ($_SESSION['user']['idRole'] == 1) { ?>
+                        <li><a class="dropdown-item" href="/admin/dashboard
             "><i class="fas fa-tachometer-alt"></i> Dashboard</a></li>
-            <li><hr class="dropdown-divider"></li>
-        <?php } ?>
-        <li><a class="dropdown-item" href="/profil"><i class="fas fa-user"></i> Profil</a></li>
-        <li><a class="dropdown-item" href="/logout"><i class="fas fa-sign-out-alt"></i> Déconnexion</a></li>
-    <?php } else { ?>
-        <li><a class="dropdown-item" href="/login"><i class="fas fa-sign-in-alt"></i> Connexion</a></li>
-        <li><a class="dropdown-item" href="/register"><i class="fas fa-user-plus"></i> Inscription</a></li>
-    <?php } ?>
-</ul>
+                        <li>
+                            <hr class="dropdown-divider">
+                        </li>
+                    <?php } ?>
+                    <li><a class="dropdown-item" href="/profil"><i class="fas fa-user"></i> Profil</a></li>
+                    <li><a class="dropdown-item" href="/logout"><i class="fas fa-sign-out-alt"></i> Déconnexion</a></li>
+                <?php } else { ?>
+                    <li><a class="dropdown-item" href="/login"><i class="fas fa-sign-in-alt"></i> Connexion</a></li>
+                    <li><a class="dropdown-item" href="/register"><i class="fas fa-user-plus"></i> Inscription</a></li>
+                <?php } ?>
+            </ul>
         </div>
     </nav>
 
