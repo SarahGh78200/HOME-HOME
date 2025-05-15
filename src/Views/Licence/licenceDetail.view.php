@@ -12,9 +12,9 @@ require_once(__DIR__ . '/../partials/head.php');
     
         <h2><?= htmlspecialchars($myLicence->getTitle() ?? '') ?></h2>
 
-        <p class="pDetail"><strong>Description :</strong> <?= htmlspecialchars($myLicence->getDescription() ?? '') ?></p>
-        <p  class="price"><strong>Prix :</strong> <?= htmlspecialchars($myLicence->getPrice() ?? '') ?> €</p>
-        <p class="pDetail"><strong>Vendeur :</strong> <?= htmlspecialchars($userInfo['name'] ?? ''); ?> (<?= htmlspecialchars($userInfo['email'] ?? ''); ?>)</p>
+        <p class="pDetail"><strong>Description :</strong> <?=($myLicence->getDescription() ?? '') ?></p>
+        <p  class="price"><strong>Prix :</strong> <?= ($myLicence->getPrice() ?? '') ?> €</p>
+        <!-- <p class="pDetail"><strong>Vendeur :</strong> <?= ($userInfo['name'] ?? ''); ?> <?=($userInfo['email'] ?? ''); ?></p> -->
 
         <!-- Bouton Réserver -->
         <a href="/contact-vendeur/:id<?= $myLicence->getId() ?>" class="buy-button">Contacter le vendeur</a>

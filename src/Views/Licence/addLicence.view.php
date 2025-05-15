@@ -25,18 +25,11 @@ require_once(__DIR__ . '/../partials/head.php');
     <!-- Formulaire -->
     <form method="POST" enctype="multipart/form-data">
         <div class="form1" class="col-md-4 mx-auto d-block mt-5">
-            <!-- Champ Titre -->
-            <div class="mb-3">
-                <label for="title" class="form-label">Titre de la licence</label>
-                <input type="text" class="form-control" id="title" name="title" value="<?= htmlspecialchars($title) ?>" required>
-                <?php if (isset($errors['title'])) { ?>
-                    <p class="text-danger"><?= htmlspecialchars($errors['title']) ?></p>
-                <?php } ?>
-            </div>
+      
           <!-- Champ Description -->
             <div class="mb-3">
                 <label for="description" class="form-label">Description</label>
-                <textarea class="form-control" id="description" name="description" rows="4" required><?= htmlspecialchars($description) ?></textarea>
+                <textarea class="form-control" id="description" name="description" rows="4" ><?= htmlspecialchars($description) ?></textarea>
                 <?php if (isset($errors['description'])) { ?>
                     <p class="text-danger"><?= htmlspecialchars($errors['description']) ?></p>
                 <?php } ?>

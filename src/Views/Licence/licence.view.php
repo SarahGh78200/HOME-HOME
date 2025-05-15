@@ -13,22 +13,26 @@ require_once(__DIR__ . '/../partials/head.php');
     <?php } ?>
 </div>
     <!-- Affichage des cartes -->
-    <?php if (!empty($licences)): ?>
+    <?php if (!empty($myLicences)): ?>
         <div class="licence-cards">
-            <?php foreach ($licences as $licence): ?>
+            <?php foreach ($myLicences as $licence): ?>
                 <?php if ($licence->getAvailability()): // Vérifie si la licence est disponible 
                 ?>
-                    <a href="/licenceDetail?id=<?= $licence->getId(); ?>" class="card">
-        
-                        <h2><?= htmlspecialchars($licence->getTitle()) ?></h2>
-                        <p>Description:<?= htmlspecialchars($licence->getDescription()) ?></p>
-                        <p class="price">Prix: <?= htmlspecialchars($licence->getPrice()) ?> €</p>
-
+                    <a href="/licenceDetail=<?= $licence->getId(); ?>" class="card">
+    
+                        <p>Description:<?= $licence->getDescription() ?></p>
+                        <p>Disponibilité:<?= $licence->getAvailability() ?></p>
+                        <p>Prix: <?= $licence->getPrice() ?> </p>
+                        <p>Type:<?= $licence->getType() ?></p>
+                        <p>Date de mises en service:<?= $licence->getCommissioning_date() ?></p>
+                        <p>Ville:<?= $licence->getCity() ?></p>
+                        
+                    <a href=""></a>
                         <!-- Bouton Acheter -->
                         <!-- Bouton Acheter -->
                         <form class="formLicence" action="/licenceDetail" method="get">
-                            <input type="hidden" name="id" value="<?= $licence->getId(); ?>">
-                            <button type="submit" class="buy-button">Réservé</button>
+                            <input type="hidden" name="id" value="<?= $licence->getLicenceById(); ?>">
+                            <button type="submit" class="buy-button">Voir plus</button>
                         </form>
 
                     </a>
