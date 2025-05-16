@@ -21,7 +21,7 @@ $router->addRoute('/licenceUser', 'UserController', 'mesLicences');
 $router->addRoute('/editProfilUser', 'UserController', 'editProfilUser');
 
 // Détails des licences
-$router->addRoute('/licenceDetail', 'LicenceController', 'getLicenceById');
+$router->addRoute('/licenceDetailById', 'LicenceController', 'getLicenceById');
 
 // Gestion des licences
 $router->addRoute('/addLicence', 'LicenceController', 'addLicence');

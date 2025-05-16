@@ -18,7 +18,7 @@ require_once(__DIR__ . '/../partials/head.php');
             <?php foreach ($myLicences as $licence): ?>
                 <?php if ($licence->getAvailability()): // Vérifie si la licence est disponible 
                 ?>
-                    <a href="/licenceDetail=<?= $licence->getId(); ?>" class="card">
+                    <a href="/licenceDetailById?id=<?= $licence->getId(); ?>" class="card">
     
                         <p>Description:<?= $licence->getDescription() ?></p>
                         <p>Disponibilité:<?= $licence->getAvailability() ?></p>
@@ -26,14 +26,6 @@ require_once(__DIR__ . '/../partials/head.php');
                         <p>Type:<?= $licence->getType() ?></p>
                         <p>Date de mises en service:<?= $licence->getCommissioning_date() ?></p>
                         <p>Ville:<?= $licence->getCity() ?></p>
-                        
-                    <a href=""></a>
-                        <!-- Bouton Acheter -->
-                        <!-- Bouton Acheter -->
-                        <form class="formLicence" action="/licenceDetail" method="get">
-                            <input type="hidden" name="id" value="<?= $licence->getLicenceById(); ?>">
-                            <button type="submit" class="buy-button">Voir plus</button>
-                        </form>
 
                     </a>
                 <?php endif; ?>
