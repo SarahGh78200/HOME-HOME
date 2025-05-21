@@ -19,7 +19,7 @@ $router->addRoute('/logout', 'LogoutController', 'logout');
 $router->addRoute('/profil', 'UserController', 'profil');
 $router->addRoute('/licenceUser', 'UserController', 'mesLicences');
 $router->addRoute('/editProfilUser', 'UserController', 'editProfilUser');
-
+// $router->addRoute(('/licenceUserByID'),'LicenceController', 'getLicenceById');
 // Détails des licences
 $router->addRoute('/licenceDetailById', 'LicenceController', 'getLicenceById');
 

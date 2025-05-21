@@ -24,37 +24,36 @@ require_once(__DIR__ . '/../partials/head.php');
                 <table class="table table-striped table-bordered">
                     <thead class="table-dark">
                         <tr>
-                            <th>Titre</th>
                             <th>Description</th>
                             <th>Prix (€)</th>
+                            <th>Type </th>
                             <th>Disponibilité</th>
-                            <th>Action</th>
+                            <th>Editer</th>
+        
                         </tr>
                     </thead>
                     <tbody>
-                        <?php foreach ($licences as $licence) : ?>
-                            <tr>
-                                <td><?= htmlspecialchars($licence->getTitle()) ?></td>
-                                <td><?= htmlspecialchars($licence->getDescription()) ?></td>
-                                <td><?= htmlspecialchars($licence->getPrice()) ?> €</td>
-                                <td>
-                                    <span class="badge <?= $licence->getAvailability() ? 'bg-success' : 'bg-danger' ?>">
-                                        <?= $licence->getAvailability() ? 'Disponible' : 'Indisponible' ?>
-                                    </span>
-                                </td>
-                                <td>
-                                    <a href="/editLicence?id=<?= $licence->getId() ?>" class="btn btn-warning btn-sm">
-                                        ✏️ Modifier
-                                    </a>
-                                    <form action="/deleteLicence" method="POST" onsubmit="return confirm('Voulez-vous vraiment supprimer cette licence ?');" style="display:inline;">
-                                        <input type="hidden" name="id" value="<?= $licence->getId() ?>">
-                                        <button type="submit" class="btn btn-danger btn-sm">🗑️ Supprimer</button>
-                                    </form>
-                                </td>
+    <?php foreach ($licences as $licence) : ?>
+        <tr>
+            <td><?= htmlspecialchars($licence->getDescription()) ?></td>
+            <td><?= htmlspecialchars($licence->getPrice()) ?> €</td>
+            <td><?= htmlspecialchars($licence->getType()) ?></td>
+            <td>
+                <span class="badge <?= $licence->getAvailability() ? 'bg-success' : 'bg-danger' ?>">
+                    <?= $licence->getAvailability() ? 'Disponible' : 'Indisponible' ?>
+                </span>
+            </td>
+            <td>
+                <a href="/editLicence?id=<?= $licence->getId() ?>" class="btn btn-warning btn-sm">✏️ Modifier</a>
+                <form action="/deleteLicence" method="POST" onsubmit="return confirm('Voulez-vous vraiment supprimer cette licence ?');" style="display:inline;">
+                    <input type="hidden" name="id" value="<?= $licence->getId() ?>">
+                    <button type="submit" class="btn btn-danger btn-sm">🗑️ Supprimer</button>
+                </form>
+            </td>
+        </tr>
+    <?php endforeach; ?>
+</tbody>
 
-                            </tr>
-                        <?php endforeach; ?>
-                    </tbody>
                 </table>
             </div>
         <?php endif; ?>

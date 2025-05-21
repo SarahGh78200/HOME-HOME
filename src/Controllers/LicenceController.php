@@ -27,144 +27,145 @@ class LicenceController extends AbstractController
         }
     }
 
-    // public function addLicence()
-    // {
-    //     //AJOUTE LES COMMENTAIRE
-    //     if (!isset($_SESSION['user']) || empty($_SESSION['user']['idRole'])) {
-    //         $this->redirectToRoute('/');
-    //     }
-    //     if (isset($_POST['type'])) {
-    //         $this->check('description', $_POST['description']);
-    //         $this->check('availability', $_POST['availability']);
-    //         $this->check('price', $_POST['price']);
-    //         $this->check('type', $_POST['type']);
-    //         $this->check('commisionning_date', $_POST['commisionning_date']);
-    //         $this->check('city', $_POST['city']);
-    //         $this->check('id_user', $_POST['id_user']);
+    public function addLicence()
+    {
+        //AJOUTE LES COMMENTAIRE
+        if (!isset($_SESSION['user']) || empty($_SESSION['user']['idRole'])) {
+            $this->redirectToRoute('/');
+        }
+        if (isset($_POST['type'])) {
+            $this->check('description', $_POST['description']);
+            $this->check('price', $_POST['price']);
+            $this->check('type', $_POST['type']);
+            $this->check('commissioning_date', $_POST['commissioning_date']);
+            $this->check('city', $_POST['city']);
+            
+          
+            if (empty($this->arrayError)) {
+                // htmlspecialchars permet l'execution de script malveillant    
+                $description = htmlspecialchars($_POST['description']);
+                $price = htmlspecialchars($_POST['price']);
+                $type = htmlspecialchars($_POST['type']);
+                $commissioning_date = date('Y-m-d H:i:s'); // <— corrigé
+                $city = htmlspecialchars($_POST['city']);
+                $id_user = $_SESSION['user']['idUser'];
+               
+                //J'instancie une classe
+                $licence = new Licence( null,$description, null, $price, $type, $commissioning_date, $city,$id_user,null);
+                $licence->addLicence();
+                $this->redirectToRoute('/addLicence');
+            }
+        }
 
-    //         if (empty($this->arrayError)) {
+        require_once(__DIR__ . "/../Views/Licence/addLicence.view.php");
+    }
 
-    //             $description = htmlspecialchars($_POST['description']);
-    //             $availability = htmlspecialchars($_POST['availability']);
-    //             $price = htmlspecialchars($_POST['price']);
-    //             $type = htmlspecialchars($_POST['type']);
-    //             $commisionning_date = htmlspecialchars($_POST['commisionning_date']);
-    //             $city = htmlspecialchars($_POST['city']);
-    //             $id_user = $_SESSION['user']['id_user'];
-    //         }
-    //         $licence = new Licence(null, $description, $availability, $price, $type, $commisionning_date, $city, $id_user);
-    //         $licence->addLicence();
-    //         $this->redirectToRoute('/licence');
-    //     }
-    // }
+
+
+
 
     //CREER UNE METHODE
 
-public function getAllLicence()
-{
-    $licence = new Licence(null,null,null,null,null,null,null,null);
-    $myLicences = $licence->getAllLicence();
-    require_once(__DIR__ . "/../Views/Licence/licence.view.php");     
-}
+    public function getAllLicence()
+    {
+        $licence = new Licence(null, null, null, null, null, null, null, null, null);
+        $myLicences = $licence->getAllLicence();
 
-    public function getLicenceById(){
-        if(isset($GET['id'])){
+        require_once(__DIR__ . "/../Views/Licence/licence.view.php");
+    }
+
+    public function getLicenceById()
+    {
+
+        if (isset($_GET['id'])) {
+
             $idLicence = $_GET['id'];
-            $licence = new Licence($idLicence, null, null, null, null, null, null, null, null);
+
+            $licence = new Licence($idLicence, null, null, null, null, null, null, null, null, null);
             $myLicence = $licence->getLicenceById();
 
-            if(!$myLicence){
+            if (!$myLicence) {
                 $this->redirectToRoute('/');
             }
 
-            if (isset($_POST['description'])){
-                $this->check('description', $_POST['description']);
-                $this->check('availability', $_POST['availability']);
-                $this->check('price', $_POST['price']);
-                $this->check('type', $_POST['type']);
-                $this->check('commisionning_date', $_POST['commisionning_date']);
-                $this->check('city', $_POST['city']);
+            if (isset($_POST['user'])) {
+                $user = htmlspecialchars($_POST['user']);
 
-              if (empty($this->arrayError)) {
+
+                $this->checkFormat('user', $user);
+
+                if (empty($this->arrayError)) {
+
                     $description = htmlspecialchars($_POST['description']);
                     $availability = htmlspecialchars($_POST['availability']);
                     $price = htmlspecialchars($_POST['price']);
                     $type = htmlspecialchars($_POST['type']);
-                    $commisionning_date = htmlspecialchars($_POST['commisionning_date']);
-                    $city = htmlspecialchars($_POST['city'])   ;
-                     
+                    $commissioning_date = htmlspecialchars($_POST['commissioning_date']); // <— corrigé
+                    $city = htmlspecialchars($_POST['city']);
+                }
             }
-             require_once(__DIR__ . "/../Views/Licence/licenceDetail.view.php"); 
-            }
+
+            require_once(__DIR__ . "/../Views/Licence/licenceDetail.view.php");
+        } else {
+            $this->redirectToRoute('/');
         }
     }
+
+
+
+            public function editLicence()
+        {       
+    if (isset($_GET['id'])) {
+        $id = (int) $_GET['id'];
+
+        // Récupère la licence par ID
+        $licence = new Licence($id, null, null, null, null, null, null, null, null);
+        $licence = $licence->getLicenceById(); // Tu dois avoir cette méthode dans ta classe Licence
+
+        if (!$licence) {
+            $this->redirectToRoute('/');
+        }
+
+        if ($_SERVER['REQUEST_METHOD'] === 'POST') {
+            $description = htmlspecialchars($_POST['description']);
+            $price = (float) $_POST['price'];
+            $availability = isset($_POST['availability']) ? 1 : 0;
+            $type = htmlspecialchars($_POST['type']);
+            $commissioning_date = htmlspecialchars($_POST['commissioning_date']);
+            $city = htmlspecialchars($_POST['city']);
+            $id_user = (int) $_POST['id_user']; // Vérifie bien que ce champ est transmis
+            $email = htmlspecialchars($_POST['email']);
+
+            $updatedLicence = new Licence($id, $description, $availability, $price, $type, $commissioning_date, $city, $id_user, $email);
+            $updatedLicence->update(); // Tu dois avoir une méthode `update()` dans ta classe Licence
+
+            $this->redirectToRoute('/mesLicences');
+        }
+
+        require_once(__DIR__ . '/../Views/Licence/editLicence.view.php');
+    } else {
+        $this->redirectToRoute('/');
+    }
 }
-//     public function getLicenceByxId()
-// {
-//     // Vérifie que l'ID est bien présent dans l'URL
-//     if (isset($_GET['id'])) {
-//         $idLicence = $_GET['id'];
 
-//         // Crée une instance de Licence avec uniquement l'ID
-//         $licence = new Licence($idLicence, null, null, null, null, null, null, null);
 
-//         // Récupère la licence depuis la base de données
-//         $myLicence = $licence->getLicenceById();
 
-//         // Si aucune licence n'est trouvée, on redirige vers la page d'accueil
-//         if (!$myLicence) {
-//             $this->redirectToRoute('/');
-//         }
 
-//     }
-// }
+    public function deleteLicence()
+    {
+        if (!isset($_SESSION['user']) || !$_SESSION['user']['idRole']) {
+            echo "<script>var permissionMessage = 'Vous n\'avez pas les permissions pour supprimer cette licence.';</script>";
+            return;
+        }
 
-    //  public function addKidTask()
-    //     {
-    //         if (isset($_GET['id'])) {
-    //             //on met l'id de la tache dans une variable
-    //             $idTask = $_GET['id'];
-    //             //on instancie une nouvelle tache avec l'id de la tache
-    //             $task = new Task($idTask, null, null, null, null, null, null, null, null, null, null);
-    //             //on appelle la méthode pour aller chercher la tache dans la BDD on met le resulat dans la variable
-    //             $myTask = $task->getTaskById();
-
-    //             $user = new User(null, null, null, null, null, null);
-    //             $myKids = $user->getKids();
-
-    //             if (!$myTask) {
-    //                 $this->redirectToRoute('/');
-    //             }
-
-    //             if (isset($_POST['kid'])) {
-    //                 $idKid = htmlspecialchars($_POST['kid']);
-    //                 $status = htmlspecialchars($_POST['status']);
-
-    //                 $this->checkFormat('kid', $idKid);
-    //                 $this->checkFormat('status', $status);
-
-    //                 if (empty($this->arrayError)) {
-    //                     $task = new Task($idTask, null, null, null, null, null, null, null, $status, null, $idKid);
-    //                     $task->addTodo();
-    //                     $this->redirectToRoute('/');
-    //                 }
-    //             }
-
-//     public function deleteLicence()
-//     {
-//         if (!isset($_SESSION['user']) || !$_SESSION['user']['idRole']) {
-//             echo "<script>var permissionMessage = 'Vous n\'avez pas les permissions pour supprimer cette licence.';</script>";
-//             return;
-//         }
-
-//         if (isset($_POST['id'])) {
-//             $idLicence = htmlspecialchars($_POST['id']);
-//             $licence = new Licence($idLicence, null, null, null, null, null, null, null, null);
-//             $licence->deleteLicence();
-//             $_SESSION['successMessage'] = "Licence supprimée avec succès.";
-//             $this->redirectToRoute('/licenceUser');
-//         }
-//     }
+        if (isset($_POST['id'])) {
+            $idLicence = htmlspecialchars($_POST['id']);
+            $licence = new Licence($idLicence, null, null, null, null, null, null, null, null);
+            $licence->deleteLicence();
+            $_SESSION['successMessage'] = "Licence supprimée avec succès.";
+            $this->redirectToRoute('/licenceUser');
+        }
+    }
 
 
 
@@ -194,3 +195,4 @@ public function getAllLicence()
 //         // require_once(__DIR__ . '/../Views/Licence/editLicence.view.php');
 //     }
 // }
+}

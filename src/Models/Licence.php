@@ -16,8 +16,9 @@ class Licence
     protected ?string $commissioning_date;
     protected ?string $city;
     protected ?int $id_user;
+    protected ?string $email;
 
-    public function __construct(?int $id, ?string $description, ?int $availability, ?float $price, ?string $type, ?string $commissioning_date, ?string $city, ?int $id_user)
+    public function __construct(?int $id, ?string $description, ?int $availability, ?float $price, ?string $type, ?string $commissioning_date, ?string $city, ?int $id_user ,?string $email)
     {
         $this->id = $id;
         $this->description = $description;
@@ -27,15 +28,17 @@ class Licence
         $this->commissioning_date = $commissioning_date;
         $this->city = $city;
         $this->id_user = $id_user;
+        $this->email = $email;
     }
 
     public function addLicence(): bool
     {
         $pdo = DataBase::getConnection();
-        $sql = "INSERT INTO licence (description, availability, price, type, commissioning_date, city, id_user)
-        VALUES (?, ?, ?, ?, ?, ?, ?)";
+        $sql = "INSERT INTO `licence`(`id`,`description`, `availability`,`price`, `type`, `commissioning_date`, `city`,`id_user`)
+        VALUES (?, ?, ?, ?, ?, ?, ?, ?)";
         $statement = $pdo->prepare($sql);
         return $statement->execute([
+            $this->id,
             $this->description,
             $this->availability,
             $this->price,
@@ -43,9 +46,9 @@ class Licence
             $this->commissioning_date,
             $this->city,
             $this->id_user,
+            
         ]);
     }
-
 
     public static function getAllLicence(): array
     {
@@ -77,21 +80,28 @@ class Licence
                 $row['commissioning_date'],
                 $row['city'],
                 $row['id_user'],
+                null
             );
         }
         // On retourne le tableau contenant tous les objets Licence créés
         return $licences;
     }
 
-
- public function getLicenceById()
+    public function getLicenceById()
 {
     // Connexion à la base de données via une méthode statique de la classe DataBase
     $pdo = DataBase::getConnection();
 
-    $sql = "SELECT `licence`.`id`, `licence`.`description`, `licence`.`availability`, 
-                   `licence`.`price`, `licence`.`type`, `licence`.`commissioning_date`, 
-                   `licence`.`city`, `licence`.`id_user` 
+    $sql = "SELECT 
+                `licence`.`id`, 
+                `licence`.`description`, 
+                `licence`.`availability`, 
+                `licence`.`price`, 
+                `licence`.`type`, 
+                `licence`.`commissioning_date`, 
+                `licence`.`city`, 
+                `licence`.`id_user`,
+                `user`.`email` -- Récupération de l'email de l'utilisateur
             FROM `licence` 
             LEFT JOIN `user` ON `licence`.`id_user` = `user`.`id` 
             WHERE `licence`.`id` = ?";
@@ -107,7 +117,10 @@ class Licence
 
     // Si une ligne est trouvée
     if ($row) {
-        // On retourne un nouvel objet Licence avec les données récupérées
+        // // Ici tu peux utiliser $row['email'] si tu en as besoin
+        // $email = $row['email'];
+
+        // Création d'un objet Licence, tu peux aussi décider de lui passer l'email si le constructeur l'accepte
         return new Licence(
             $row['id'],
             $row['description'],
@@ -116,18 +129,14 @@ class Licence
             $row['type'],
             $row['commissioning_date'],
             $row['city'],
-            null 
+            $row['id_user'],
+            $row['email'], 
         );
     } else {
         // Si aucune licence trouvée, retourne null
         return null;
     }
 }
-
-
-
-
-
 
 
     // public function deleteLicence(): bool
@@ -227,4 +236,6 @@ class Licence
     {
         return $this->type;
     }
+     public function getEmail(): ?string  
+            { return $this->email; }
 }

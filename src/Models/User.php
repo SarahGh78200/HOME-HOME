@@ -131,7 +131,7 @@ class User
         foreach ($rows as $row) {
             $licences[] = new Licence(
                 $row['id'],
-                $row['title'],
+                
                 $row['description'],
                 (int) $row['availability'], // Convertir en entier
                 $row['price'],

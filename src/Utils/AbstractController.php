@@ -16,7 +16,7 @@ abstract class AbstractController
     public function isNotEmpty($value)
     {
         if (empty($_POST[$value])) {
-            $this->arrayError[$value] = "Le champ $value ne peut pas être vide.";
+            -$this->arrayError[$value] = "Le champ $value ne peut pas être vide.";
             return $this->arrayError;
         }
         return false;
@@ -88,6 +88,15 @@ abstract class AbstractController
                     $this->arrayError['price'] = 'Le prix doit être un nombre valide (avec ou sans décimales), supérieur ou égal à 2.';
                 }
                 break;
+            case 'type':
+                if (!preg_match($regexName, $value)) {
+                    $this->arrayError['type'] = 'Merci de renseigner un pseudo correct!';
+                }
+                     break;
+            case 'type':
+                if (!preg_match($regexName, $value)) {
+                    $this->arrayError['type'] = 'Merci de renseigner un pseudo correct!';
+                }
         }
     }
 
