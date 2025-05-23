@@ -2,39 +2,32 @@
 
 namespace App\Controllers;
 
-use App\Models\User;
+use App\Utils\AbstractController;
 use App\Models\Licence;
-
-class AdminController
+use App\Models\User;
+class AdminController extends AbstractController
 {
-    public function dashboard()
+  public function deleteLicence()
     {
-        $users = User::findAll();
-        $licences = Licence::findAll();
 
-        $editUser = isset($_GET['editUser']) ? User::findById((int)$_GET['editUser']) : null;
-        $editLicence = isset($_GET['editLicence']) ? Licence::findById((int)$_GET['editLicence']) : null;
-
-        require_once __DIR__ . '/../Views/Admin/dashboard.view.php';
-    }
-
-    public function deleteUser()
-    {
-        if (isset($_GET['id'])) {
-            $user = new User((int)$_GET['id'], null, null, null, null, null, null);
-            $user->deleteUser();
-            header("Location: /admin/dashboard");
-            exit;
-        }
-    }
-
-    public function deleteLicence()
-    {
-        if (isset($_GET['id'])) {
-            $licence = new Licence((int)$_GET['id'], null, null, null, null, null, null);
+        if (isset($_POST['id'])) {
+            $idLicence = htmlspecialchars($_POST['id']);
+            $licence = new Licence($idLicence, null, null, null, null, null, null,null, null);
             $licence->deleteLicence();
-            header("Location: /admin/dashboard");
-            exit;
+            $this->redirectToRoute('/dashboard');
         }
     }
+      public function deleteUser()
+    {
+
+        if (isset($_POST['id'])) {
+            $idUser = htmlspecialchars($_POST['id']);
+            $user = new User($idUser, null, null, null, null, null, null, null, null);
+            $user->deleteUser();
+            $this->redirectToRoute('/dashboard');
+        }
+    }
+
+
+    
 }

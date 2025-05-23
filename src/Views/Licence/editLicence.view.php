@@ -1,50 +1,71 @@
-<!DOCTYPE html>
-<html lang="fr">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Édition de la Licence</title>
-    <!-- Lien vers Bootstrap CSS -->
-    <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
-    <!-- Lien vers notre CSS personnalisé -->
-    <link rel="stylesheet" href="/public/css/styles.css">
-</head>
-<body>
-    <div class="container mt-5">
-        <h2 class="text-center mb-4">Édition de la Licence</h2>
-        
-        <!-- Formulaire d'édition -->
-        <form method="POST" enctype="multipart/form-data">
-            <div class="form-group">
-                <label for="title">Titre :</label>
-                <input type="text" name="title" id="title" class="form-control" value="<?= htmlspecialchars($licence->getTitle()) ?>" required>
-            </div>
+<?php require_once __DIR__ . '/../partials/head.php'; ?>
 
-            <div class="form-group">
-                <label for="description">Description :</label>
-                <textarea name="description" id="description" class="form-control" rows="4" required><?= htmlspecialchars($licence->getDescription()) ?></textarea>
-            </div>
+<main class="editLicenceSimple">
+  <h2>Modifier ma licence</h2>
 
-            <div class="form-group">
-                <label for="price">Prix :</label>
-                <input type="number" name="price" id="price" class="form-control" value="<?= htmlspecialchars($licence->getPrice()) ?>" min="0" step="0.01" required>
-            </div>
+  <?php if (!empty($errorMessage)): ?>
+    <p class="error" style="color: red;">
+      <?= htmlspecialchars($errorMessage) ?>
+    </p>
+  <?php endif; ?>
 
-            <!-- Disponibilité (checkbox) -->
-            <div class="form-group form-check">
-                <input type="checkbox" name="availability" id="availability" class="form-check-input" <?= $licence->getAvailability() ? 'checked' : '' ?>>
-                <label class="form-check-label" for="availability">Licence disponible</label>
-            </div>
+  <form action="/updateLicence" method="POST">
+    <!-- ID caché pour savoir quelle licence mettre à jour -->
+    <input type="hidden" name="id" value="<?= htmlspecialchars($licence->getId()) ?>">
 
-    
-            <button type="submit" class="btn btn-primary btn-block">Enregistrer les modifications</button>
-        </form>
-    </div>
+    <label for="description">Description :</label>
+    <input
+      type="text"
+      id="description"
+      name="description"
+      value="<?= htmlspecialchars($licence->getDescription()) ?>"
+      required
+    >
 
-    <!-- Lien vers Bootstrap JS et jQuery (nécessaire pour certaines fonctionnalités) -->
-    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
-    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.5.2/dist/umd/popper.min.js"></script>
-    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
-</body>
-</html>
-<?php require_once(__DIR__ . '/../partials/footer.php'); ?>
+    <label for="availability">Disponibilité :</label>
+    <select id="availability" name="availability">
+      <option value="1" <?= $licence->getAvailability() ? 'selected' : '' ?>>Disponible</option>
+      <option value="0" <?= !$licence->getAvailability() ? 'selected' : '' ?>>Indisponible</option>
+    </select>
+
+    <label for="price">Prix (€) :</label>
+    <input
+      type="number"
+      step="0.01"
+      id="price"
+      name="price"
+      value="<?= htmlspecialchars($licence->getPrice()) ?>"
+      required
+    >
+
+  
+      <label for="type">Disponibilité :</label>
+    <select id="type" name="type">
+      <option value="Location" <?= $licence->getType() ? 'selected' : '' ?>>Location</option>
+      <option value="Achat" <?= !$licence->getType() ? 'selected' : '' ?>>Achat</option>
+    </select>
+
+
+    <label for="commissioning_date">Date de mise en service :</label>
+    <input
+      type="date"
+      id="commissioning_date"
+      name="commissioning_date"
+      value="<?= htmlspecialchars($licence->getCommissioning_Date()) ?>"
+      required
+    >
+
+    <label for="city">Ville :</label>
+    <input
+      type="text"
+      id="city"
+      name="city"
+      value="<?= htmlspecialchars($licence->getCity()) ?>"
+      required
+    >
+
+    <button type="submit">Enregistrer</button>
+  </form>
+</main>
+
+<?php require_once(__DIR__ . '/../partials/footer.php'); 

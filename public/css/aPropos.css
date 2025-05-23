@@ -1,73 +1,63 @@
 .bodyAproposCss {
-    font-family: Arial, sans-serif;
-    margin: 0;
-    padding: 0;
-    
-    color: #ffffff;
-    
-        width: 60%;
-    display: block;
-    margin: auto;
-    
-
-}
-.containerApropos{
-text-align: center;
-background-color: rgba(153, 23, 23, 0.3);
-    display: block;
-    margin: auto;
-        margin-top: 65px;
-        border-radius: 10px;
-}
-    .textApropos{
-    margin: auto;
-    }
-
-
-
-.h1aPropos,
-h2,
-h3 {
-    color: #ffffff;
-    margin: auto;
+    font-family: 'Poppins', sans-serif;
+    background: #f8f9fa;
+    padding: 40px 20px;
+    color: #333;
 }
 
-ul {
-    list-style: none;
-    padding: 0;
+.containerApropos {
+    max-width: 800px;
+    margin: 0 auto;
+    background-color: white;
+    padding: 40px;
+    border-radius: 12px;
+    box-shadow: 0 8px 16px rgba(0,0,0,0.05);
 }
 
-ul li {
-    padding: 5px 0;
+.textApropos h1,
+.textApropos h2,
+.textApropos h3 {
+    color: #1255d0;
+    font-weight: 600;
+    margin-top: 30px;
+}
+
+.h1aPropos {
+    text-align: center;
+    font-size: 2.2rem;
+    color: #002855;
+}
+
+.textApropos p {
+    font-size: 1.1rem;
+    line-height: 1.7;
+    margin: 15px 0;
+}
+
+.textApropos ul {
+    margin-left: 20px;
+    padding-left: 15px;
+    font-size: 1rem;
+    line-height: 1.6;
 }
 
 .highlight {
-    font-weight: bold;
-    color: #e01313;
+    font-weight: 600;
+    color: #0056b3;
 }
 
 .cta {
-    display: block;
-    width: max-content;
-    margin: 20px auto;
-    padding: 10px 20px;
-    background: #004d99;
+    display: inline-block;
+    margin-top: 30px;
+    background-color: #1255d0;
     color: white;
-    text-align: center;
+    padding: 12px 24px;
+    border-radius: 25px;
     text-decoration: none;
-    font-size: 18px;
-    border-radius: 5px;
+    font-weight: 500;
+    transition: background-color 0.3s ease;
 }
 
 .cta:hover {
-    background: #003366;
-}
-
-@media (max-width: 768px) {
-    .cta{
-               width: 100%;
-    }
-    .bodyAproposCss {
-        width: 90%;
-    }
+    background-color: #0e46a3;
 }

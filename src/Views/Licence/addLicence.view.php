@@ -89,5 +89,6 @@ require_once(__DIR__ . '/../partials/head.php');
     </form>
 </main>
 
-<?php
-// Pied de page
+
+
+<?php require_once(__DIR__ . '/../partials/footer.php'); ?>

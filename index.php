@@ -11,38 +11,39 @@ $router = new Router();
 $router->addRoute('/', 'HomeController', 'index');
 
 // Connexion/Déconnexion & Inscription
-$router->addRoute('/register', 'RegisterController', 'index');
-$router->addRoute('/login', 'LoginController', 'index');
-$router->addRoute('/logout', 'LogoutController', 'logout');
+$router->addRoute('/register', 'RegisterController', 'index');//FONCTIONNE
+$router->addRoute('/login', 'LoginController', 'index');//FONCTIONNE
+$router->addRoute('/logout', 'LogoutController', 'logout');//FONCTIONNE
 
 // Profil utilisateur
-$router->addRoute('/profil', 'UserController', 'profil');
-$router->addRoute('/licenceUser', 'UserController', 'mesLicences');
-$router->addRoute('/editProfilUser', 'UserController', 'editProfilUser');
-// $router->addRoute(('/licenceUserByID'),'LicenceController', 'getLicenceById');
+$router->addRoute('/profil', 'UserController', 'profil');//FONCTIONNE
+$router->addRoute('/licenceUser', 'UserController', 'mesLicences');//FONCTIONNE
+$router->addRoute('/editProfilUser', 'UserController', 'editProfilUser');//FONCTIONNE
+
 // Détails des licences
-$router->addRoute('/licenceDetailById', 'LicenceController', 'getLicenceById');
+$router->addRoute('/licenceDetailById', 'LicenceController', 'getLicenceById');//FONCTIONNE
 
 // Gestion des licences
-$router->addRoute('/addLicence', 'LicenceController', 'addLicence');
-$router->addRoute('/getAllLicence','LicenceController','getAllLicence');
-$router->addRoute('/licence', 'LicenceController', 'readLicence');
-$router->addRoute('/editLicence', 'LicenceController', 'editLicence');
-$router->addRoute('/updateLicence', 'LicenceController', 'updateLicence'); // Ajout de la route manquante
-$router->addRoute('/deleteLicence', 'LicenceController', 'deleteLicence');
+$router->addRoute('/addLicence', 'LicenceController', 'addLicence');//FONCTIONNE
+$router->addRoute('/getAllLicence','LicenceController','getAllLicence');//FONCTIONNE
+// $router->addRoute('/licence', 'LicenceController', 'readLicence');
+$router->addRoute('/editLicence', 'LicenceController', 'editLicence');//FONCTIONNE
+$router->addRoute('/updateLicence', 'LicenceController', 'updateLicenceUser'); // Ajout de la route manquante
+$router->addRoute('/deleteLicence', 'LicenceController', 'deleteLicence');//FONCTIONNE
 //CONTACT VENDEUR 
 $router->addRoute('/contact-vendeur/:licenceId', 'UserController', 'contactVendeur');
 $router->addRoute('/contact-vendeur/:id', 'UserController', 'contactVendeur');
 //CONTACT ADMIN 
 $router->addRoute('/contact', 'ContactController', 'index');
+
 // $router->addRoute('/admin', 'UserController', 'dashboardAdmin');
 // Dashboard Admin complet
-$router->addRoute('/admin/dashboard', 'AdminController', 'dashboard');
+$router->addRoute('/dashboard', 'UserController', 'dashboardGet');//FONCTIONNE
 
 // Supprimer un utilisateur
-$router->addRoute('/admin/deleteUser', 'AdminController', 'deleteUser');
+$router->addRoute('/deleteUser', 'AdminController', 'deleteUser');// FONCTIONNE EN POST
 
 // Supprimer une licence
-$router->addRoute('/admin/deleteLicence', 'AdminController', 'deleteLicence');
+$router->addRoute('deleteLicenceUser', 'AdminController', 'deleteLicence');//FONCTIONNE EN POST
 
 $router->handleRequest();

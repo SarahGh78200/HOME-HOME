@@ -42,8 +42,8 @@
                 <?php if (!empty($_SESSION['user'])) { ?>
                     <!-- Afficher le Dashboard UNIQUEMENT si l'utilisateur a idRole == 1 -->
                     <?php if ($_SESSION['user']['idRole'] == 1) { ?>
-                        <li><a class="dropdown-item" href="/admin/dashboard
-            "><i class="fas fa-tachometer-alt"></i> Dashboard</a></li>
+                        <li><a class="dropdown-item" href="/dashboard"><i class="fas fa-tachometer-alt"></i> Dashboard</a></li>
+
                         <li>
                             <hr class="dropdown-divider">
                         </li>

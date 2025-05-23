@@ -39,15 +39,22 @@
 }
 
 .ulNav li {
-    margin: 0 15px;
+    margin: 0 10px;
+    display: flex;
+    align-items: center;
 }
 
 .ulNav li a {
     color: white;
     text-decoration: none;
-    padding: 8px 12px;
-    transition: color 0.3s;
+    font-size: 16px; /* Taille claire et lisible */
+    font-weight: 500; /* Texte un peu plus gras */
+    padding: 6px 10px;
+    transition: color 0.3s ease;
+    line-height: 1.2; /* Corrige les retours à la ligne comme pour "À propos" ou "Foire aux questions ?" */
+    white-space: nowrap; /* Empêche les retours à la ligne */
 }
+
 
 .ulNav li a:hover {
     color: #1255d0;
@@ -78,12 +85,19 @@
 .dropdown-menu .dropdown-item:hover {
     background-color: #ff6464;
 }
+.dropdown-toggle{
+    color: rgb(255, 255, 255);
+      font-weight: bold;
+    
+}
 
 
 @media (max-width: 768px) {
     .ulNav {
         display: none;
         flex-direction: column;
+        align-items: center; /* ✅ centre les <li> horizontalement */
+        justify-content: center; /* ✅ optionnel, pour verticalement */
         position: absolute;
         top: 60px;
         width: 100%;
@@ -94,6 +108,10 @@
 
     .ulNav.active {
         display: flex;
+    }
+
+    .ulNav li {
+        margin: 10px 0; /* Espacement vertical */
     }
 
     .custom-menu {

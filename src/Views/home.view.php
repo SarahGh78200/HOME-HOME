@@ -21,7 +21,7 @@
             <p>Vous cherchez une licence de taxi pour démarrer votre activité ?</p>
             <p>Accédez à notre catalogue de licences disponibles à la location ou à la vente partout en France.</p>
             <p>Publiez ou trouvez une licence en quelques clics, en toute sécurité.</p>
-            <a href="/src/Views/Licence/licence.view.php" class="cta-button">Voir les licences disponibles</a>
+            <a href="/getAllLicence" class="cta-button">Voir les licences disponibles</a>
         </div>
     </div>
 </section>

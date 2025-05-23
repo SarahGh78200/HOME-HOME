@@ -30,25 +30,26 @@ class Licence
         $this->id_user = $id_user;
         $this->email = $email;
     }
+    //User Model
+public function addLicence(): bool
+{
+    $pdo = DataBase::getConnection();
+    $sql = "INSERT INTO `licence`(`description`, `availability`, `price`, `type`, `commissioning_date`, `city`, `id_user`)
+            VALUES (?, ?, ?, ?, ?, ?, ?)";
+    
+    $statement = $pdo->prepare($sql);
+    
+    return $statement->execute([
+        $this->description,
+        $this->availability,
+        $this->price,
+        $this->type,
+        $this->commissioning_date,
+        $this->city,
+        $this->id_user
+    ]);
+}
 
-    public function addLicence(): bool
-    {
-        $pdo = DataBase::getConnection();
-        $sql = "INSERT INTO `licence`(`id`,`description`, `availability`,`price`, `type`, `commissioning_date`, `city`,`id_user`)
-        VALUES (?, ?, ?, ?, ?, ?, ?, ?)";
-        $statement = $pdo->prepare($sql);
-        return $statement->execute([
-            $this->id,
-            $this->description,
-            $this->availability,
-            $this->price,
-            $this->type,
-            $this->commissioning_date,
-            $this->city,
-            $this->id_user,
-            
-        ]);
-    }
 
     public static function getAllLicence(): array
     {
@@ -85,7 +86,7 @@ class Licence
         }
         // On retourne le tableau contenant tous les objets Licence créés
         return $licences;
-    }
+    }//NEW
 
     public function getLicenceById()
 {
@@ -130,22 +131,43 @@ class Licence
             $row['commissioning_date'],
             $row['city'],
             $row['id_user'],
-            $row['email'], 
+            $row['email']
         );
     } else {
         // Si aucune licence trouvée, retourne null
         return null;
     }
-}
+}//NEW
 
 
-    // public function deleteLicence(): bool
-    // {
-    //     $pdo = DataBase::getConnection();
-    //     $sql = "DELETE FROM `licence` WHERE `id` = ?";
-    //     $statement = $pdo->prepare($sql);
-    //     return $statement->execute([$this->id]);
-    // }
+
+    public function updateLicenceUser()
+    {
+        $pdo = DataBase::getConnection();
+        $sql = "UPDATE `licence` 
+        SET `description` = ?, `availability` = ?, `price` = ?, `type` = ?, `commissioning_date` = ?, `city`=?
+        WHERE `licence`.`id` = ?";
+        $statement = $pdo->prepare($sql);
+        return $statement->execute([$this->description, $this->availability, $this->price, $this->type, $this->commissioning_date,$this->city, $this->id]);
+    } 
+
+
+
+    public function deleteLicence(): bool
+    {
+        $pdo = DataBase::getConnection();
+        $sql = "DELETE FROM `licence` WHERE `id` = ?";
+        $statement = $pdo->prepare($sql);
+        return $statement->execute([$this->id]);
+    }
+
+
+
+    //Admin Model
+
+
+
+
 
 
 
@@ -212,12 +234,12 @@ class Licence
         return $this->commissioning_date;
     }
 
-    public function setCommissioning_date(?string $commissioning_date): static
+    public function setCommissioningdate(?string $commissioning_date): static
     {
         $this->commissioning_date = $commissioning_date;
         return $this;
     }
-    public function getCity(): ?int
+    public function getCity():?string
     {
         return $this->city;
     }
