@@ -1,167 +1,70 @@
-/* Style principal de la page */
-.licenceCss {
-    font-family: 'Arial', sans-serif;
-    margin: 0;
-    padding: 0;
-    background-color: #f5f5f5;
-    color: #333;
-}
-
-/* Titre de la page */
-.tittleAnnouncement {
-    text-align: center;
-    font-size: 2.5em;
-    margin-top: 20px;
-    color: #2c3e50;
-    font-weight: bold;
-}
-
-/* Container pour afficher les cartes */
 .licence-cards {
-    display: grid;
-    grid-template-columns: repeat(4, 1fr); /* 4 cartes par ligne */
+    display: flex;
+    flex-wrap: wrap;
     gap: 20px;
-    padding: 20px;
-    max-width: 1200px;
-    margin: 0 auto;
+    justify-content: center;
+    margin-top: 30px;
 }
 
-/* Style de chaque carte */
 .card {
     background-color: #fff;
-    border-radius: 8px;
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* Ombre pour effet de profondeur */
-    overflow: hidden;
-    transition: transform 0.3s ease, box-shadow 0.3s ease; /* Transition au survol */
-    border: 1px solid #ddd;
+    border-radius: 12px;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+    padding: 20px;
+    width: 300px;
+    text-decoration: none;
+    color: #222; /* ✅ Texte plus foncé pour lisibilité */
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+    position: relative;
 }
 
 .card:hover {
-    transform: translateY(-5px); /* Effet de décalage au survol */
-    box-shadow: 0 6px 16px rgba(0, 0, 0, 0.2); /* Ombre plus prononcée au survol */
+    transform: translateY(-5px);
+    box-shadow: 0 6px 20px rgba(0, 0, 0, 0.15);
 }
 
-/* Image de la carte */
-.card img {
-    width: 100%;
-    height: 200px;
-    object-fit: cover; /* Assure que l'image est bien découpée sans déformation */
-    border-bottom: 1px solid #ddd;
-}
-
-/* Titre de la carte */
-.card h2 {
-    font-size: 1.4em;
-    color: #2c3e50;
-    margin: 15px 0 10px;
-    padding: 0 10px;
-    font-weight: 600;
-    text-transform: capitalize;
-}
-
-/* Description de la carte */
 .card p {
-    font-size: 1em;
-    color: #555;
-    margin: 0 10px 10px;
+    margin: 10px 0;
+    font-size: 16px;
 }
 
-/* Prix de la licence */
-.card .price {
-    font-weight: bold;
-    font-size: 1.2em;
-    color: #27ae60;
-    margin-top: 10px;
-    text-align: center;
+.buttonLicence1 {
+    display: flex;
+    justify-content: flex-end;
+    padding: 10px 30px 0 30px;
 }
 
-/* Texte "Disponible" */
-.card p:last-child {
-    font-size: 0.9em;
-    color: #27ae60;
-    font-weight: bold;
-    text-align: center;
-}
-
-/* Button d'ajout de licence */
-.button-add {
-    display: inline-block;
-    padding: 10px 20px;
-    background-color: #27ae60;
+.buttonLicence1 a {
+    background-color: #007BFF;
     color: white;
-    border-radius: 5px;
+    padding: 10px 18px;
     text-decoration: none;
-    text-align: center;
-    margin: 20px auto;
-    display: block;
-}
-
-.button-add:hover {
-    background-color: #2ecc71;
-}
-
-/* Bouton Acheter */
-.buy-button {
-    background-color: #2980b9; /* Couleur bleue */
-    color: white;
-    padding: 10px 20px;
-    border-radius: 5px;
+    border-radius: 8px;
+    font-weight: bold;
     border: none;
-    font-size: 1em;
-    cursor: pointer;
-    transition: background-color 0.3s ease, transform 0.3s ease;
-    width: 100%;
-    margin-top: 15px;
+    box-shadow: none; /* ✅ Supprime le contour moche */
+    transition: background-color 0.2s ease;
 }
 
-.buy-button:hover {
-    background-color: #3498db; /* Couleur bleue plus claire au survol */
-    transform: translateY(-2px); /* Effet de déplacement léger */
+.buttonLicence1 a:hover {
+    background-color: #0056b3;
 }
 
-.buy-button:focus {
-    outline: none; /* Retirer la bordure de focus */
+/* Bouton voir plus dans la carte */
+.card .voir-plus {
+    display: inline-block;
+    margin-top: 10px;
+    background-color: #007BFF;
+    color: white;
+    padding: 6px 12px;
+    border-radius: 6px;
+    font-size: 14px;
+    text-align: center;
+    text-decoration: none;
 }
-.buttonLicence1{
-    display: block;
-    text-align: end;
-    padding-right: 56px;
-
-
-}
-
-
-/* Adaptations pour les petits écrans */
 @media (max-width: 768px) {
-    .licence-cards {
-        grid-template-columns: repeat(2, 1fr); /* 2 cartes par ligne pour les écrans petits */
-    }
-
-    .search-bar input[type="text"] {
-        width: 200px;
-    }
-}
-
-@media (max-width: 480px) {
-    .licence-cards {
-        grid-template-columns: 1fr; /* 1 carte par ligne sur les très petits écrans */
-    }
-
-    .search-bar {
-        display: flex;
-        flex-direction: column;
-        align-items: center;
-    }
-    
-    .search-bar input[type="text"] {
-        width: 100%;
-        max-width: 250px;
-        margin-bottom: 10px;
-    }
-    .submit11{
-        display: block;
-        margin:auto;
-        margin-right: 20px;
-
+    .buttonLicence1 {
+        justify-content: center;
+        padding: 20px 10px 0 10px;
     }
 }

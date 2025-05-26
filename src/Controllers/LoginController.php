@@ -1,4 +1,5 @@
-<?php  
+<?php
+
 namespace App\Controllers;
 
 use App\Utils\AbstractController;
@@ -6,8 +7,6 @@ use App\Models\User;
 
 class LoginController extends AbstractController
 {
-    private array $errors = []; // Ajout de cette ligne
-
     public function index()
     {
         if (isset($_POST['email'], $_POST['password'])) {
@@ -18,34 +17,36 @@ class LoginController extends AbstractController
                 $email = htmlspecialchars($_POST['email']);
                 $password = htmlspecialchars($_POST['password']);
 
-                $user = User::findByEmail($email);
+                // Création d’un objet User juste pour appeler la méthode login
+                $user = new User(null, null, null, null, $password, null, null, $email);
+                $responseGetUser = $user->login($email);
 
-                if ($user) {
-                    if  (password_verify($password, $user->getPassword())) {
+                if ($responseGetUser) {
+                    $passwordUser = $responseGetUser->getPassword();
+
+                    if (password_verify($password, $passwordUser)) {
                         $_SESSION['user'] = [
-                            'id' => $user->getId(),
-                            'surname' => $user->getSurname(),
-                            'name' => $user->getName(),
-                            'idUser' => $user->getId(),
-                            'idRole' => $user->getId_Role(),
-                            'email' => $user->getEmail(),
+                            'id'      => uniqid(),
+                            'email'   => $responseGetUser->getEmail(),
+                            'name'    => $responseGetUser->getName(),
+                            'surname' => $responseGetUser->getSurname(),
+                            'idUser'  => $responseGetUser->getId(),
+                            'idRole'  => $responseGetUser->getIdRole()
                         ];
                         $this->redirectToRoute('/');
                     } else {
-                        $this->errors['password'] = "Mot de passe incorrect ou adresse mail incorrect";
+                        $error = "Email ou mot de passe incorrect.";
                     }
                 } else {
-                    $this->errors['email'] = "Mot de passe incorrect ou adresse mail incorrect ou inexistante  ";
+                    $error = "Email ou mot de passe incorrect.";
                 }
             }
         }
 
         if (isset($_SESSION['user'])) {
-            $this->redirectToRoute('/profil');
+            $this->redirectToRoute('/');
         }
 
-        // On passe $this->errors à la vue
-        $errors = $this->errors; // On crée une variable locale
         require_once(__DIR__ . "/../Views/security/login.view.php");
     }
 }

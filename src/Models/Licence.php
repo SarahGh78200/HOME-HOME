@@ -51,7 +51,7 @@ public function addLicence(): bool
 }
 
 
-    public static function getAllLicence(): array
+    public static function getAllLicence(): array//
     {
         // On récupère une connexion à la base de données via une méthode statique du fichier Database
         $pdo = Database::getConnection();
@@ -140,7 +140,7 @@ public function addLicence(): bool
 }//NEW
 
 
-
+// PERMET DE MODIFIER EN BASE DE DONNER LES LICENCE DE L'UTULISATEUR 
     public function updateLicenceUser()
     {
         $pdo = DataBase::getConnection();

@@ -1,74 +1,52 @@
-/* STYLE GÉNÉRAL */
-
 .bodyController {
     font-family: Arial, sans-serif;
     text-align: center;
-    background-color: #7fb7f0;
-    /* /* overflow-x: hidden;
-    min-height: 100vh; */
-} */
-
-VIDÉO EN FOND
-.video-background {
-    position: absolute; 
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    object-fit: cover;
-    z-index: -1;
-    padding-top: 110px;
-   
+    margin: 0;
+    padding: 0;
+    overflow-x: hidden;
 }
 
-/* CONTENU PRINCIPAL */
+/* Toute la section avec image en fond */
+.image-background {
+    width: 100%;
+    min-height: 100vh;
+    background: url('/public/img/iStock-177432768.jpg') no-repeat center center;
+    background-size: cover;
+    padding: 80px 20px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+/* Cartes */
+.hero-flex {
+    display: flex;
+    justify-content: center;
+    flex-wrap: wrap;
+    gap: 40px;
+    margin-bottom: 60px;
+}
+
 .content {
-    position: relative; /* au lieu de absolute */
-    margin: 150px auto 40px auto; /* marge top pour laisser voir la vidéo */
-    width: 90%;
-    max-width: 1000px;
-    background: rgba(0, 0, 0, 0.6);
+    background: rgba(0, 0, 0, 0.7);
     color: white;
     border-radius: 15px;
-    padding: 30px 20px;
-    z-index: 1;
-    box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.3);
+    padding: 30px 25px;
+    width: 90%;
+    max-width: 500px;
+    box-shadow: 0px 4px 15px rgba(0, 0, 0, 0.3);
+    transition: transform 0.3s ease;
 }
 
+.content:hover {
+    transform: translateY(-5px);
+}
 
-/* IMAGE HAUT */
-.content::before {
-    content: "";
-    display: block;
-    width: 100%;
-    height: 180px;
-    background: url('/public/images/reconversion.jpg') no-repeat center;
-    background-size: contain;
+.titlehome {
+    font-size: 2em;
     margin-bottom: 20px;
 }
 
-/* IMAGE BAS */
-.content::after {
-    content: "";
-    display: block;
-    width: 100%;
-    height: 180px;
-    background: url('/public/images/licence-taxi.jpg') no-repeat center bottom;
-    background-size: contain;
-    margin-top: 20px;
-}
-
-/* TITRE */
-.titlehome {
-    padding-top: 10px;
-    font-size: 2em;
-}
-
-.titlehome span {
-    color: #007BFF;
-}
-
-/* CTA */
 .cta-button {
     display: inline-block;
     background-color: #007BFF;
@@ -78,39 +56,46 @@ VIDÉO EN FOND
     text-decoration: none;
     font-weight: bold;
     margin-top: 20px;
-    transition: background 0.3s ease;
+    transition: background-color 0.3s ease;
 }
 
 .cta-button:hover {
     background-color: #0056b3;
 }
 
-/* SECTION : COMMENT ÇA MARCHE */
+/* Étapes */
 .how-it-works {
-    padding: 60px 20px;
-   
-    border-radius: 15px;
-    max-width: 1100px;
-    margin: 50px auto;
-    position: relative;
-    z-index: 2;
+    color: white;
+    text-align: center;
+    padding-top: 20px;
+    padding-bottom: 40px;
 }
 
-.steps {
+.titlehomeh2 {
+    font-size: 2em;
+    color: #00A2FF;
+    margin-bottom: 40px;
+}
+
+.steps-only {
     display: flex;
-    flex-wrap: wrap;
     justify-content: center;
-    gap: 25px;
-    margin-top: 40px;
+    flex-wrap: wrap;
+    gap: 30px;
+    margin-bottom: 40px;
+    max-width: 1200px;
+    padding: 0 20px;
 }
 
 .step {
-    background-color: #f1f1f1;
-    padding: 20px;
+    background-color: white;
+    padding: 25px 20px;
     border-radius: 12px;
     width: 280px;
     max-width: 100%;
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.05);
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+    text-align: center;
+    color: #333;
     transition: transform 0.3s ease;
 }
 
@@ -120,81 +105,37 @@ VIDÉO EN FOND
 
 .step h3 {
     color: #007BFF;
-}
-/* CONTENEUR FLEX POUR LES BLOCS CONTENT */
-.hero-flex {
-    display: flex;
-    justify-content: center;
-    gap: 40px;
-    flex-wrap: wrap;
-  
-    position: relative;
-    z-index: 1;
+    font-size: 1.3em;
+    margin-bottom: 10px;
 }
 
-.hero-flex .content {
-    flex: 1 1 45%;
-    max-width: 45%;
+.step p {
+    font-size: 0.95em;
 }
 
-/* RESPONSIVE : repasser en colonne sur petits écrans */
+/* Responsive mobile */
 @media screen and (max-width: 768px) {
-    .hero-flex .content {
-        flex: 1 1 100%;
-       max-width: 81%;
-    
+    .hero-flex {
+        flex-direction: column;
+        align-items: center;
     }
-}
 
-
-
-/* RESPONSIVE DESIGN */
-@media screen and (max-width: 768px) {
     .content {
-        top: 120px;
-        padding: 20px 15px;
-    }
-
-    .content::before,
-    .content::after {
-        height: 120px;
-        background-size: cover;
+        width: 90%;
+        margin-bottom: 30px;
     }
 
     .titlehome {
         font-size: 1.5em;
     }
 
-    .steps {
+    .cta-button {
+        padding: 10px 20px;
+        font-size: 0.95em;
+    }
+
+    .steps-only {
         flex-direction: column;
         align-items: center;
-    }
-
-    .step {
-        width: 90%;
-    }
-
-    .testimonial-list blockquote {
-        padding: 15px;
-    }
-
-    .faq summary {
-        font-size: 1em;
-    }
-}
-
-@media screen and (max-width: 480px) {
-    .titlehome {
-        font-size: 1.2em;
-    }
-
-    .cta-button {
-        padding: 10px 16px;
-        font-size: 0.9em;
-    }
-
-    .content::before,
-    .content::after {
-        height: 100px;
     }
 }

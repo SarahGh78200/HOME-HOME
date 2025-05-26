@@ -40,8 +40,8 @@ require_once(__DIR__ . '/partials/head.php');
             <li><span class="highlight">🔒 Sécurisé et transparent</span></li>
             <li><span class="highlight">🤝 Accompagnement personnalisé</span></li>
         </ul>
-        <button></button>
-        <a href="/register" class="cta">Rejoignez Free Moove maintenant !</a>
+       
+        <a href="/register" class="buttonApropos">Rejoignez Free Moove maintenant !</a>
     </div>
 </div>
 </main>
@@ -49,6 +49,3 @@ require_once(__DIR__ . '/partials/head.php');
  
  require_once __DIR__ . '/partials/footer.php';
     ?>
-
-        <!-- *dcyc btzs enea fwdx -->
-         <!-- */ybyc jexf ijiw tzzy -->

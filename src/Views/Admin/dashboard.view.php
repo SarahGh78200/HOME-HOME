@@ -27,7 +27,7 @@
                             <td><?= htmlspecialchars($user->getSurname() ?? '') ?></td>
                             <td><?= htmlspecialchars($user->getName() ?? '') ?></td>
                             <td><?= htmlspecialchars($user->getEmail() ?? '') ?></td>
-                            <td><?= $user->getId_Role() == 1 ? 'Admin' : 'Utilisateur'; ?></td>
+                            <td><?= $user->getIdRole() == 1 ? 'Admin' : 'Utilisateur'; ?></td>
                             <td>
                                 <form action="/deleteUser" method="POST" style="display:inline;" onsubmit="return confirm('Supprimer cet utilisateur ?');">
                                     <input type="hidden" name="id" value="<?= $user->getId(); ?>">

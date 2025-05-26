@@ -14,3 +14,4 @@ class HomeController extends AbstractController
         require_once(__DIR__ . '/../Views/home.view.php');
     }
 }
+//Permet de rediriger vers la page d'acceuil

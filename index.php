@@ -45,5 +45,6 @@ $router->addRoute('/deleteUser', 'AdminController', 'deleteUser');// FONCTIONNE 
 
 // Supprimer une licence
 $router->addRoute('deleteLicenceUser', 'AdminController', 'deleteLicence');//FONCTIONNE EN POST
+$router->addRoute('/cgv', 'CgvController', 'index');
 
 $router->handleRequest();
